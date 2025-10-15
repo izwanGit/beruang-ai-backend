@@ -1,0 +1,941 @@
+description,label
+Groceries for the week,0
+Rent payment,0
+Electricity bill,0
+Water utility,0
+Doctor visit,0
+Medication purchase,0
+Bus fare to work,0
+Gas for car commute,0
+Internet bill for home office,0
+Phone bill,0
+Hospital emergency,0
+Insurance premium,0
+Fuel refill,0
+Essential clothing repair,0
+Basic hygiene products,0
+School supplies for kids,0
+Home repair materials,0
+Public transport pass,0
+Basic food staples,0
+Utility payment overdue,0
+Coffee at Starbucks,1
+Movie tickets,1
+Restaurant dinner,1
+New video game,1
+Gym membership renewal,1
+Netflix subscription,1
+Spotify premium,1
+Vacation booking,1
+Designer clothes shopping,1
+Concert tickets,1
+Hobby supplies like paints,1
+Electronics gadget,1
+Luxury watch,1
+Spa treatment,1
+Bar drinks with friends,1
+Fast food delivery,1
+Gaming console accessory,1
+Fashion accessories,1
+Weekend getaway,1
+High-end headphones,1
+Cinema popcorn,1
+Online shopping spree,1
+Subscription box service,1
+Golf club membership,1
+Expensive perfume,1
+Mortgage payment,0
+Car insurance payment,0
+Student loan payment,0
+Property tax,0
+Childcare costs,0
+Prescription eyeglasses,0
+Dental check-up,0
+Essential car maintenance,0
+Tire replacement,0
+Brake repair,0
+Baby formula,0
+Diapers,0
+Toilet paper,0
+Soap and shampoo,0
+Work uniform,0
+Required textbooks for class,0
+Renter's insurance,0
+Minimum credit card payment,0
+Garbage collection fee,0
+Natural gas bill,0
+Co-pay for medical visit,0
+Pet food,0
+Emergency vet visit,0
+Required professional license fee,0
+Replacing a broken appliance,0
+School lunch money,0
+Basic phone plan,0
+Bank account maintenance fee,0
+Pest control service,0
+Plumbing repair,0
+Roof leak fix,0
+Manicure and pedicure,1
+Cable TV package,1
+Sporting event tickets,1
+Food delivery service fee,1
+Ordering dessert at a restaurant,1
+Latest smartphone model,1
+Smartwatch purchase,1
+Designer handbag,1
+Brand-name sneakers,1
+Amusement park tickets,1
+Upgraded plane ticket,1
+Hotel room service,1
+Souvenir shopping,1
+Art class subscription,1
+New set of golf clubs,1
+Gourmet coffee beans,1
+Meal kit delivery subscription,1
+Interior decorations for home,1
+Scented candles,1
+Magazine subscription,1
+Buying a round of drinks,1
+Party decorations,1
+Car wash and detailing,1
+Lottery tickets,1
+In-app purchases for a game,1
+Collectible items,1
+Streaming service bundle,1
+Concert merchandise,1
+Escape room entry fee,1
+Bowling night out,1
+Imported cheese,1
+Bubble tea,1
+Weekly pizza night,1
+Makeup palette,1
+Audible subscription,1
+Yarn for knitting hobby,1
+New fishing equipment,1
+Drone purchase,1
+Sports memorabilia,1
+All-inclusive resort package,1
+Custom jewelry,1
+Vintage wine,1
+Craft beer tasting,1
+Paid mobile app,1
+Home theater system,1
+Bayar bil TNB,0
+Bayar bil air,0
+Ansuran rumah,0
+Sewa rumah,0
+Bayaran PTPTN,0
+Ansuran kereta,0
+Isi minyak motor,0
+Isi minyak kereta,0
+Beli beras,0
+Beli barang dapur,0
+Top up Touch 'n Go,0
+Bayaran tol,0
+Pas bulanan My50 RapidKL,0
+Insurans dan road tax kereta,0
+Servis motor,0
+Servis kereta,0
+Bayar bil Unifi,0
+Top up prepaid,0
+Plan postpaid phone,0
+Yuran sekolah anak,0
+Beli buku sekolah,0
+Pampers dan susu anak,0
+Pergi klinik,0
+Beli ubat di farmasi,0
+Bayaran cukai pintu,0
+Bayaran cukai tanah,0
+Bayaran bil IWK,0
+Zakat pendapatan,0
+Tambang bas,0
+Tambang LRT/MRT,0
+Barang-barang asas tandas,0
+Ganti tayar pancit,0
+Parking kerja,0
+Makan tengahari di pejabat (bungkus),0
+Deposit sewa rumah baru,0
+Bil pembetungan,0
+Yuran PIBG sekolah,0
+Beli gas memasak,0
+Repair paip bocor,0
+Beli cermin mata baru (power dah lari),0
+Pemeriksaan gigi,0
+Makanan kucing,0
+Ubat kutu untuk haiwan peliharaan,0
+Bayaran taska,0
+Repair aircond rosak,0
+Makan di kedai Mamak,1
+Beli Tealive,1
+Order GrabFood,1
+Order Foodpanda,1
+Tengok wayang GSC,1
+Beli tiket TGV,1
+Langganan Astro,1
+Beli barang di Shopee,1
+Beli barang di Lazada,1
+Shopping baju di mall,1
+Dinner di restoran 'fancy',1
+Beli Starbucks,1
+Beli kopi di Coffee Bean,1
+Percutian Cuti-Cuti Malaysia,1
+Booking hotel di Genting,1
+Beli baju raya,1
+Beli Musang King,1
+Karaoke dengan kawan-kawan,1
+Bayar membership gym,1
+Beli nombor ekor,1
+Langganan Viu,1
+Beli skin Mobile Legends,1
+Beli game Steam,1
+Minum di pub,1
+Hiasan rumah dari Kaison,1
+Beli perabot baru IKEA,1
+Cuci kereta 'polish and wax',1
+Beli tudung baru,1
+Beli kasut sneakers baru,1
+Makan aiskrim Baskin Robbins,1
+Pergi konsert,1
+Beli merchandise artis K-Pop,1
+Beli aksesori kereta,1
+Rawatan muka di spa,1
+Urut badan,1
+Beli emas,1
+Makan di Secret Recipe,1
+Beli supplement tidak penting,1
+Langganan Tonton,1
+Pergi 'funfair',1
+Tiket masuk Sunway Lagoon,1
+Beli gajet baru,1
+Dating di kafe hipster,1
+Join kelas zumba,1
+Beli mainan untuk anak,1
+Top up game online,1
+Beli set LEGO baru,1
+Makan 'shell out',1
+Beli iPhone model terbaru,1
+Life insurance payment,0
+Health insurance deductible,0
+Required school uniform,0
+Replacing a broken water heater,0
+First-aid kit supplies,0
+Income tax payment,0
+Car registration renewal,0
+Driver's license renewal,0
+Child support payment,0
+Essential legal fees,0
+Locksmith fee,0
+Batteries for smoke detector,0
+Basic haircut,0
+Laundry detergent,0
+Dish soap,0
+Light bulbs,0
+Internet for school work,0
+Cooking oil,0
+Debt repayment (above minimum),0
+Towing service after breakdown,0
+Annual medical physical,0
+Flu shot,0
+Dental cleaning,0
+Basic dental fillings,0
+Contact lens solution,0
+Feminine hygiene products,0
+Work boots,0
+Safety glasses for work,0
+Tax preparation service,0
+Roadside assistance membership,0
+Personal trainer sessions,1
+Yoga retreat,1
+Gourmet cooking class,1
+Wine club membership,1
+First-class flight tickets,1
+Catering for a party,1
+Designer sunglasses,1
+Charity gala ticket,1
+Dog grooming service,1
+Exotic pet purchase,1
+Boat rental,1
+High-end digital camera,1
+Virtual reality headset,1
+Customized PC build for gaming,1
+Fancy salon haircut and styling,1
+Home massage chair,1
+TNB bill,0
+electric bill,0
+bayar bil elektrik,0
+Air Selangor bill,0
+bayar bil paip,0
+House loan installment,0
+ansuran bulanan rumah,0
+PTPTN loan,0
+bayar ptptn,0
+Car loan,0
+ansuran bulanan kereta,0
+Isi minyak,0
+Petrol for my car,0
+bayar minyak,0
+groceries,0
+buy kitchen stuff,0
+beli barang basah,0
+Top up TNG,0
+Toll payment,0
+My50 monthly pass,0
+road tax renewal,0
+servis kereta,0
+Unifi bill,0
+Maxis Fibre bill,0
+Celcom postpaid,0
+Digi prepaid topup,0
+School fees,0
+buy textbooks,0
+Pampers,0
+baby formula,
+Klinik visit,0
+buy medicine,0
+Pharmacy purchase,0
+Cukai Pintu,0
+cukai tanah,0
+IWK bill,0
+bayar zakat,0
+LRT fare,0
+tambang komuter,0
+Basic toiletries,0
+Tire repair,0
+tukar tayar,0
+Office parking,0
+Packed lunch for work,0
+Rental deposit,0
+Sewerage bill,0
+PIBG fee,0
+Cooking gas,0
+beli tong gas,0
+Leaking pipe repair,0
+New spectacles,0
+Dental checkup,0
+Cat food,0
+kibbles for cat,0
+Nursery fees,0
+Aircond repair,0
+baiki aircond,0
+Makan at mamak,1
+Tealive order,1
+Beli Chatime,1
+GrabFood order,1
+order foodpanda,1
+Movie ticket,1
+TGV ticket,1
+Astro bill,1
+Shopee purchase,1
+Lazada order,1
+Shopping at Uniqlo,1
+Dinner at a nice restaurant,1
+Zus Coffee,1
+Holiday in Langkawi,1
+Genting hotel booking,1
+Baju Raya shopping,1
+buy durian,1
+Karaoke session,1
+Gym membership,1
+buy 4D number,1
+iQIYI subscription,1
+buy diamonds MLBB,1
+Steam game purchase,1
+Drinks at a bar,1
+shopping at Mr DIY,1
+buy new furniture,1
+Car wash and wax,1
+new tudung from dUCK,1
+buy new Adidas shoes,1
+buy Inside Scoop ice cream,1
+attend a concert,1
+buy BTS merchandise,1
+Car accessories,1
+Facial treatment,1
+Massage session,1
+buy gold bracelet,1
+eat cake at secret recipe,1
+buy vitamins,1
+Tonton subscription,1
+go to funfair,1
+Lost World of Tambun ticket,1
+buy new gadget,1
+cafe hopping,1
+Zumba class,1
+buy new toys for kids,1
+top up Genshin Impact,1
+buy new Gundam set,1
+eat seafood,1
+buy new Samsung phone,1
+weekly grocery,0
+bayar sewa,0
+bill elektrik,0
+utility air,0
+klinik panel,0
+ubat demam,0
+tambang bas rapid,0
+isi petrol,0
+bil internet,0
+bil telefon,0
+wad kecemasan,0
+insurans nyawa,0
+refill petrol,0
+jahit seluar kerja,0
+syampu dan sabun,0
+alat tulis sekolah,0
+repair atap,0
+pas mingguan rapid,0
+barang mentah,0
+bil tertunggak,0
+starbucks coffee,1
+tiket wayang,1
+makan luar,1
+beli game PS5,1
+renew gym,1
+byr netflix,1
+spotify,1
+book percutian,1
+shopping baju branded,1
+tiket konsert,1
+beli cat air,1
+gajet elektronik,1
+jam tangan mahal,1
+pergi spa,1
+minum dengan kawan,1
+order mcd,1
+aksesori PS5,1
+beg tangan,1
+cuti hujung minggu,1
+headphone sony,1
+popcorn wayang,1
+shopping online,1
+kotak langganan,1
+keahlian kelab golf,1
+minyak wangi mahal,1
+bayar ansuran rumah,0
+insurans kereta,0
+bayaran pinjaman pelajaran,0
+cukai taksiran,0
+yuran taska,0
+cermin mata,0
+pemeriksaan gigi,0
+servis kereta berkala,0
+tayar baru,0
+repair brek,0
+susu formula,0
+lampin pakai buang,0
+tisu tandas,0
+syampu,0
+uniform kerja,0
+buku teks,0
+insurans penyewa,0
+bayaran minimum kad kredit,0
+yuran kutipan sampah,0
+bil gas asli,0
+bayaran tambahan klinik,0
+makanan haiwan,0
+klinik veterinar kecemasan,0
+yuran lesen profesional,0
+ganti peti sejuk rosak,0
+duit belanja sekolah,0
+plan telefon asas,0
+caj akaun bank,0
+servis kawalan serangga,0
+baiki paip,0
+betulkan bumbung bocor,0
+pedicure,1
+pakej astro,1
+tiket bola,1
+caj penghantaran makanan,1
+order pencuci mulut,1
+telefon model terkini,1
+beli jam pintar,1
+beg tangan berjenama,1
+kasut nike,1
+tiket taman tema,1
+upgrade tiket kapal terbang,1
+servis bilik hotel,1
+beli cenderamata,1
+kelas melukis,1
+set golf baru,1
+biji kopi premium,1
+langganan meal kit,1
+hiasan dalaman rumah,1
+lilin wangi,1
+langganan majalah,1
+belanja kawan minum,1
+hiasan parti,1
+cuci kereta dan wax,1
+tiket loteri,1
+pembelian dalam aplikasi game,1
+barang koleksi,1
+pakej siaran langsung,1
+merchandise konsert,1
+main escape room,1
+main boling,1
+keju import,1
+beli boba,1
+malam piza,1
+set mekap,1
+langganan audible,1
+benang kait,1
+peralatan memancing baru,1
+beli dron,1
+memorabilia sukan,1
+pakej percutian resort,1
+barang kemas custom,1
+wain mahal,1
+sesi rasa bir,1
+aplikasi berbayar,1
+sistem teater rumah,1
+bayaran bil utiliti,0
+sewa bulanan,0
+bil tnb,0
+bil syabas,0
+perubatan,0
+farmasi,0
+tambang lrt ke kerja,0
+minyak kereta ulang alik,0
+internet rumah,0
+bil maxis,0
+kecemasan hospital,0
+premium insurans,0
+petrol,0
+repair baju,0
+barang kebersihan diri,0
+keperluan sekolah,0
+baiki rumah,0
+pas bulanan bas,0
+makanan asas,0
+bil lewat,0
+kopi mahal,1
+tiket gsc,1
+makan restoran,1
+game baru,1
+yuran gimnasium,1
+byr netflix,1
+akaun spotify,1
+booking percutian,1
+baju mahal,1
+tiket blackpink,1
+alatan seni,1
+gajet,1
+jam rolex,1
+rawatan spa,1
+minum di bar,1
+grabfood delivery,1
+controller ps5,1
+aksesori fesyen,1
+trip ke cameron,1
+headfon bose,1
+popcorn,1
+shopping gila-gila,1
+subscription box,1
+yuran kelab golf,1
+perfume dior,1
+bayar hutang rumah,0
+insuran motor,0
+loan ptptn,0
+cukai harta,0
+jaga anak,0
+spek mata,0
+check gigi,0
+maintenance kereta,0
+tayar kereta,0
+brek problem,0
+susu baby,0
+pampers anak,0
+toilet paper roll,0
+sabun mandi,0
+baju kerja,0
+buku rujukan,0
+insuran rumah sewa,0
+cc minimum payment,0
+kutip sampah,0
+bil gas,0
+bayaran klinik,0
+makanan anjing,0
+vet kecemasan,0
+yuran tahunan profesional,0
+ganti mesin basuh,0
+duit poket anak,0
+simkad basic,0
+bank fee,0
+racun anai-anai,0
+plumber,0
+tampal bumbung,0
+buat kuku,1
+pakej njoi,1
+tiket perlawanan JDT,1
+delivery fee,1
+dessert,1
+handphone baru,1
+apple watch,1
+beg coach,1
+kasut new balance,1
+tiket legoland,1
+upgrade ke business class,1
+room service,1
+beli keychain,1
+kelas seramik,1
+kayu golf titleist,1
+biji kopi arabica,1
+hellofresh,1
+hiasan dinding,1
+lilin yankee,1
+langganan Gempak,1
+belanja satu bar,1
+belon birthday,1
+cuci kusyen kereta,1
+beli nombor toto,1
+beli item dota,1
+kumpul setem,1
+pakej sukan astro,1
+baju band,1
+bayaran masuk escape room,1
+main bowling sepuluh pin,1
+keju Feta,1
+gong cha,1
+dominos pizza,1
+sephora makeup,1
+audiobook,1
+benang untuk mengait,1
+joran pancing,1
+dron dji,1
+jersi liverpool original,1
+pakej club med,1
+cincin custom,1
+wine tasting,1
+beer factory,1
+beli pro app,1
+sound system,1
+insurans hayat,0
+deduktibel insuran kesihatan,0
+uniform sekolah,0
+ganti pemanas air,0
+peti kecemasan,0
+bayar LHDN,0
+renew roadtax,0
+renew lesen memandu,0
+bayaran khidmat guaman,0
+kos baiki kunci,0
+bateri untuk pengesan asap,0
+potong rambut biasa,0
+sabun basuh baju,0
+sabun cuci pinggan,0
+mentol lampu,0
+internet untuk pdpr,0
+minyak masak,0
+bayar hutang lebih,0
+trak tunda,0
+pemeriksaan kesihatan tahunan,0
+vaksin selesema,0
+cuci gigi,0
+tampal gigi,0
+cecair kanta lekap,0
+tuala wanita,0
+kasut keselamatan,0
+cermin mata keselamatan,0
+servis penyediaan cukai,0
+yuran kesatuan sekerja,0
+keahlian bantuan tepi jalan,0
+sesi PT,1
+retreat yoga,1
+kelas memasak,1
+keahlian kelab wain,1
+tiket penerbangan kelas pertama,1
+servis katering parti,1
+cermin mata hitam rayban,1
+tiket majlis amal,1
+servis grooming anjing,1
+beli haiwan eksotik,1
+sewa bot,1
+kamera digital high-end,1
+headset VR,1
+bina PC gaming,1
+gaya rambut di salun,1
+kerusi urut ogawa,1
+bayar letrik,0
+sewa flet,0
+bil air,0
+pergi gp,0
+beli panadol,0
+tambang bas,0
+minyak motor,0
+bil wifi,0
+bil celcom,0
+masuk hospital,0
+insuran,0
+isi minyak,0
+betulkan seluar,0
+beli ubat gigi,0
+buku latihan anak,0
+simen,0
+pas lrt,0
+beras dan gula,0
+bil yg belum bayar,0
+kopi hipster,1
+tgv,1
+makan malam di luar,1
+beli game,1
+yuran gym,1
+langganan netflix,1
+akaun premium spotify,1
+book hotel,1
+baju zara,1
+tiket konsert,1
+berus lukisan,1
+beli power bank,1
+jam mahal,1
+facial,1
+lepak pub,1
+food delivery,1
+skin fortnite,1
+rantai,1
+staycation,1
+headphone,1
+makan popcorn,1
+shopping di zalora,1
+beauty box,1
+main golf,1
+perfume,1
+byr ansuran rumah,0
+insurans axa,0
+bayar hutang,0
+cukai,0
+hantar anak ke pengasuh,0
+buat spek,0
+tampal gigi,0
+servis honda,0
+tayar michelin,0
+tukar brek pad,0
+susu enfagrow,0
+drypers,0
+tisu,0
+body wash,0
+baju pejabat,0
+buku teks universiti,0
+insuran sewa,0
+byr cc,0
+yuran alam flora,0
+gas petronas,0
+ubat batuk,0
+makanan meow,0
+bawak kucing ke vet,0
+yuran pendaftaran,0
+ganti microwave,0
+belanja sekolah,0
+plan umobile,0
+caj perbankan,0
+bunuh anai anai,0
+tukar paip,0
+repair bumbung,0
+buat kuku kaki,1
+pasang astro,1
+tiket piala malaysia,1
+caj penghantaran,1
+beli kek,1
+samsung s24 ultra,1
+garmin watch,1
+beg bonia,1
+kasut onitsuka tiger,1
+tiket kidzania,1
+naik taraf flight,1
+pesan makanan ke bilik,1
+fridge magnet,1
+kelas tembikar,1
+set golf callaway,1
+biji kopi colombia,1
+langganan dahmakan,1
+bingkai gambar,1
+lilin jo malone,1
+beli majalah mangga,1
+belanja member,1
+reben parti,1
+vakum kereta,1
+magnum 4d,1
+beli uc pubg,1
+kumpul hot wheels,1
+pakej epl,1
+tshirt rock band,1
+main di breakout,1
+main bowling,1
+keju parmesan,1
+coolblog,1
+pizza hut,1
+beli lipstik,1
+beli buku di audible,1
+benang,1
+beli umpan pancing,1
+dji drone,1
+jersi harimau malaya,1
+pakej percutian,1
+gelang pandora,1
+arak,1
+makan di a&w,1
+aplikasi edit gambar,1
+pembesar suara,1
+byr bil api,0
+loan rumah,0
+byr bil air,0
+jumpe doktor,0
+beli ubat,0
+tambang bas ke kl,0
+minyak motor kapcai,0
+bil time,0
+bil digi,0
+masuk wad,0
+byr insuran,0
+minyak full tank,0
+tampal poket seluar,0
+deodoran,0
+buku kerja,0
+zink atap,0
+kad TNG,0
+makanan ruji,0
+bil letrik tertunggak,0
+kopi zus,1
+tiket wayang MBO,1
+makan kfc,1
+beli game nintendo switch,1
+celebrity fitness,1
+langganan disney+,1
+youtube premium,1
+book percutian krabi,1
+beli seluar levis,1
+tiket konsert dewa 19,1
+kanvas lukisan,1
+beli airpods,1
+jam g-shock,1
+rawatan badan,1
+minum tiger beer,1
+hantar makanan,1
+aksesori nintendo,1
+subang,1
+pergi port dickson,1
+headphone beats,1
+garrett popcorn,1
+beli online,1
+kotak misteri,1
+main golf,1
+minyak wangi ck,1
+Weekly grocery run,0
+Housing loan,0
+TNB bill payment,0
+Water bill payment,0
+Medical checkup,0
+Prescription medicine,0
+LRT fare,0
+Car fuel,0
+Home internet bill,0
+Postpaid plan,0
+Emergency ward visit,0
+Insurance payment,0
+Petrol top-up,0
+Clothing alteration,0
+Toiletries,0
+School stationery,0
+Roof repair,0
+Monthly travel pass,0
+Dry food items,0
+Overdue utility bill,0
+Zus Coffee order,1
+Movie outing,1
+Dining out,1
+PS5 game,1
+Gym fees,1
+Disney+ subscription,1
+Tidal subscription,1
+Flight booking,1
+Branded clothing purchase,1
+Live concert ticket,1
+Art supplies,1
+New gadget,1
+Luxury timepiece,1
+Wellness spa,1
+Social drinking,1
+Food delivery,1
+Gaming gear,1
+Jewelry,1
+Weekend trip,1
+Premium headphones,1
+Cinema snacks,1
+E-commerce shopping,1
+Monthly subscription box,1
+Country club membership,1
+Designer fragrance,1
+House mortgage,0
+Vehicle insurance,0
+Education loan,0
+Assessment tax,0
+Daycare fees,0
+New glasses,0
+Dentist appointment,0
+Periodic car service,0
+New tires,0
+Brake service,0
+Infant milk,0
+Disposable diapers,0
+Toilet roll,0
+Shampoo & soap,0
+Company uniform,0
+University textbooks,0
+Home insurance,0
+Credit card payment,0
+Waste collection fee,0
+Cooking gas bill,0
+Clinic co-payment,0
+Pet food supply,0
+Emergency vet bill,0
+Professional certification fee,0
+Replace broken fridge,0
+Kids' pocket money,0
+Basic mobile plan,0
+Bank service charge,0
+Fumigation service,0
+Plumbing service call,0
+Fixing roof leak,0
+Nail salon visit,1
+Astro subscription,1
+Football match ticket,1
+Delivery surcharge,1
+Order cake,1
+Latest iPhone,1
+Buy a smartwatch,1
+Buy new handbag,1
+Nike sneakers,1
+Theme park ticket,1
+Business class upgrade,1
+In-room dining,1
+Buy souvenirs,1
+Pottery class,1
+New golf set,1
+Specialty coffee beans,1
+Meal prep subscription,1
+Home decor items,1
+Aromatic candles,1
+Vogue subscription,1
+Treating friends,1
+Party supplies,1
+Premium car wash,1
+Buy a lottery ticket,1
+Mobile game credits,1
+Action figure collection,1
+Sports channel package,1
+Band t-shirt,1
+Pay for escape room,1
+Go bowling,1
+Artisanal cheese,1
+Buy boba tea,1
+Family pizza night,1
+Huda Beauty palette,1
+Book subscription,1
+Knitting supplies,1
+Fishing rod,1
+DJI drone,1
+Signed sports jersey,1
+Resort vacation package,1
+Custom-made ring,1
+Aged whiskey,1
+Craft beer,1
+Premium mobile app,1
+Home entertainment system,1
