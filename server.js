@@ -1,6 +1,5 @@
 const util = require('util');
-
-// --- CRITICAL FIX FOR NODE v23+ ---
+// Fix for Node v23+ compatibility
 util.isNullOrUndefined = util.isNullOrUndefined || ((value) => value === null || value === undefined);
 
 const express = require('express');
@@ -13,14 +12,18 @@ const PORT = 1234;
 
 app.use(express.json());
 
-const MODEL_PATH = 'file://' + path.resolve('./model/model.json');
-const METADATA_PATH = path.resolve('./model/metadata.json');
+// --- CONFIGURATION ---
+const TRANS_MODEL_PATH = 'file://' + path.resolve('./model_transaction/model.json');
+const TRANS_METADATA_PATH = path.resolve('./model_transaction/metadata.json');
 
-let model;
-let metadata;
-let validWords = [];
+const INTENT_MODEL_PATH = 'file://' + path.resolve('./model_intent/model.json');
+const INTENT_METADATA_PATH = path.resolve('./model_intent/metadata.json');
 
-// --- Levenshtein Distance (Fuzzy Matching) ---
+// --- GLOBAL VARIABLES ---
+let transModel, transMetadata;
+let intentModel, intentMetadata;
+
+// --- HELPER: Levenshtein Distance (Fuzzy Matching) ---
 function levenshtein(a, b) {
   const matrix = [];
   for (let i = 0; i <= b.length; i++) matrix[i] = [i];
@@ -32,10 +35,10 @@ function levenshtein(a, b) {
         matrix[i][j] = matrix[i - 1][j - 1];
       } else {
         matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i - 1][j - 1] + 1,
           Math.min(
-            matrix[i][j - 1] + 1,   // insertion
-            matrix[i - 1][j] + 1    // deletion
+            matrix[i][j - 1] + 1,
+            matrix[i - 1][j] + 1
           )
         );
       }
@@ -44,24 +47,19 @@ function levenshtein(a, b) {
   return matrix[b.length][a.length];
 }
 
-// --- Auto-Correct Logic ---
+// --- HELPER: Auto-Correct Logic ---
 function autoCorrect(tokens, wordIndex) {
+  const validWords = Object.keys(wordIndex);
   return tokens.map(word => {
-    // If word exists in vocab, keep it
     if (wordIndex[word]) return word;
-    // Don't correct short words or numbers
     if (word.length < 4) return word; 
 
-    // Find closest match
     let bestMatch = word;
     let minDist = Infinity;
-
-    // Only check words that start with the same letter to speed up
     const candidates = validWords.filter(w => w.startsWith(word[0]));
 
     for (const candidate of candidates) {
       const dist = levenshtein(word, candidate);
-      // Allow 1 error for words < 6 chars, 2 errors for longer
       const threshold = word.length > 6 ? 2 : 1;
       
       if (dist <= threshold && dist < minDist) {
@@ -73,36 +71,23 @@ function autoCorrect(tokens, wordIndex) {
   });
 }
 
-async function loadModel() {
-  try {
-    console.log('Loading model...');
-    model = await tf.loadLayersModel(MODEL_PATH);
-    metadata = await fs.readJson(METADATA_PATH);
-    
-    // Cache valid words for auto-correct
-    validWords = Object.keys(metadata.wordIndex);
-    
-    console.log('✓ Model and metadata loaded successfully!');
-  } catch (error) {
-    console.error('FATAL: Could not load model:', error);
-  }
-}
-
-function preprocess(text, wordIndex, maxLen, maxVocabSize) {
+// --- HELPER: Text Preprocessing ---
+function preprocess(text, metadata) {
+  const { wordIndex, maxLen, maxVocabSize } = metadata;
+  
   const cleanText = text.toLowerCase().replace(/[^a-z0-9\s]/g, '');
   let tokens = cleanText.split(' ').filter(t => t.trim() !== '');
   
-  // 1. Apply Auto-Correct
+  // Apply Auto-Correct
   const correctedTokens = autoCorrect(tokens, wordIndex);
-  console.log(`Original: "${tokens.join(' ')}" -> Corrected: "${correctedTokens.join(' ')}"`);
-
-  // 2. Convert to Sequence
+  
+  // Convert to Sequence
   const sequence = correctedTokens.map(word => {
     const index = wordIndex[word];
     return (index && index < maxVocabSize) ? index : 1; // 1 is <UNK>
   });
 
-  // 3. Pad
+  // Pad
   if (sequence.length > maxLen) {
     return sequence.slice(0, maxLen);
   }
@@ -110,37 +95,139 @@ function preprocess(text, wordIndex, maxLen, maxVocabSize) {
   return [...pad, ...sequence];
 }
 
-app.post('/predict', async (req, res) => {
+// ★★★ NEW: Multi-Layer OOD Detection System ★★★
+function detectOOD(message, sequence, predictions, metadata) {
+  const reasons = [];
+  
+  // Layer 1: Input Quality Check
+  const validTokens = sequence.filter(t => t > 1).length; // Non-padding, non-UNK
+  if (validTokens === 0) {
+    reasons.push('No recognized words');
+    return { isOOD: true, reasons, confidence: 0 };
+  }
+  
+  const unkRatio = sequence.filter(t => t === 1).length / sequence.filter(t => t > 0).length;
+  if (unkRatio > 0.6) {
+    reasons.push(`${(unkRatio * 100).toFixed(0)}% unknown words`);
+  }
+  
+  // Layer 2: Length Check
+  const tokens = message.toLowerCase().split(' ').filter(t => t.trim() !== '');
+  if (tokens.length > 15) {
+    reasons.push('Query too long (complex)');
+  }
+  
+  // Layer 3: Prediction Confidence Analysis
+  const predData = predictions.dataSync();
+  const maxConf = Math.max(...predData);
+  const maxIdx = predData.indexOf(maxConf);
+  
+  // Get predicted intent name
+  const intentIndexReverse = metadata.intentIndex;
+  const predictedIntent = intentIndexReverse[String(maxIdx)] || intentIndexReverse[maxIdx];
+  
+  // Layer 4: Per-Class Threshold Check
+  const thresholds = metadata.confidenceThresholds || {};
+  const classThreshold = thresholds[predictedIntent] || metadata.globalThreshold || 0.80;
+  
+  if (maxConf < classThreshold) {
+    reasons.push(`Confidence ${(maxConf * 100).toFixed(1)}% < threshold ${(classThreshold * 100).toFixed(1)}%`);
+  }
+  
+  // Layer 5: Entropy Check (measures uncertainty)
+  const entropy = -predData.reduce((sum, p) => {
+    return sum + (p > 0 ? p * Math.log(p) : 0);
+  }, 0);
+  const maxEntropy = Math.log(predData.length);
+  const normalizedEntropy = entropy / maxEntropy;
+  
+  if (normalizedEntropy > 0.7) {
+    reasons.push(`High uncertainty (entropy: ${normalizedEntropy.toFixed(2)})`);
+  }
+  
+  // Layer 6: Second-Best Gap Check
+  const sorted = [...predData].sort((a, b) => b - a);
+  const gap = sorted[0] - sorted[1];
+  
+  if (gap < 0.15) {
+    reasons.push(`Low confidence gap (${(gap * 100).toFixed(1)}%)`);
+  }
+  
+  // Decision: Is it OOD?
+  const isOOD = reasons.length >= 2 || maxConf < classThreshold;
+  
+  return { 
+    isOOD, 
+    reasons, 
+    confidence: maxConf,
+    entropy: normalizedEntropy,
+    gap: gap,
+    predictedIntent: predictedIntent
+  };
+}
+
+// --- MODEL LOADER ---
+async function loadModels() {
   try {
-    if (!model || !metadata) return res.status(503).json({ error: 'Model loading...' });
+    console.log('------------------------------------------------');
+    console.log('🤖 INITIALIZING BERUANG AI BRAIN...');
+    
+    // Load Transaction Model
+    if (fs.existsSync(TRANS_METADATA_PATH)) {
+      transModel = await tf.loadLayersModel(TRANS_MODEL_PATH);
+      transMetadata = await fs.readJson(TRANS_METADATA_PATH);
+      console.log('✅ Transaction Model Loaded (Ready to categorize expenses)');
+    } else {
+      console.warn('⚠ Transaction Model MISSING. Run: npm run train:transaction');
+    }
+
+    // Load Intent Model
+    if (fs.existsSync(INTENT_METADATA_PATH)) {
+      intentModel = await tf.loadLayersModel(INTENT_MODEL_PATH);
+      intentMetadata = await fs.readJson(INTENT_METADATA_PATH);
+      console.log('✅ Intent Model Loaded (Ready to chat)');
+      console.log(`   - Loaded ${Object.keys(intentMetadata.intentIndex).length} intents`);
+      console.log(`   - Global threshold: ${(intentMetadata.globalThreshold * 100).toFixed(0)}%`);
+    } else {
+      console.warn('⚠ Intent Model MISSING. Run: npm run gen:intent && npm run train:intent');
+    }
+    console.log('------------------------------------------------');
+
+  } catch (error) {
+    console.error('FATAL: Model loading error:', error);
+  }
+}
+
+// ==========================================
+// ROUTE 1: PREDICT TRANSACTION
+// ==========================================
+app.post('/predict-transaction', async (req, res) => {
+  try {
+    if (!transModel || !transMetadata) return res.status(503).json({ error: 'Transaction Model not loaded' });
 
     const { description } = req.body;
     if (!description) return res.status(400).json({ error: 'No description provided' });
 
-    const { wordIndex, maxLen, maxVocabSize, categoryIndex, subcategoryIndex } = metadata;
+    const { categoryIndex, subcategoryIndex, maxLen } = transMetadata;
+    const sequence = preprocess(description, transMetadata);
     
-    // Preprocess (includes Auto-Correct)
-    const sequence = preprocess(description, wordIndex, maxLen, maxVocabSize);
-    
-    // --- FALLBACK LOGIC: "If I know nothing, go WANTS/OTHERS" ---
-    // Count how many valid words (not 0 padding, not 1 UNK) we found
+    // Fallback Check: If input is garbage or unknown
     const validTokenCount = sequence.filter(t => t > 1).length;
-    
     if (validTokenCount === 0) {
-      console.log("Unknown input detected. Defaulting to WANTS -> Others");
+      console.log(`[Transaction] Fallback triggered for: "${description}"`);
       return res.json({
         input: description,
         prediction: {
           category: "WANTS",
           subcategory: "Others",
           confidence: { category: "0.00%", subcategory: "0.00%" },
-          note: "Fallback triggered (Unknown words)"
+          note: "Fallback triggered"
         }
       });
     }
 
     const inputTensor = tf.tensor2d([sequence], [1, maxLen], 'int32');
-    const predictions = model.predict(inputTensor);
+    const predictions = transModel.predict(inputTensor);
     
     const catPred = Array.isArray(predictions) ? predictions[0] : predictions;
     const subPred = Array.isArray(predictions) ? predictions[1] : null;
@@ -159,27 +246,144 @@ app.post('/predict', async (req, res) => {
 
     inputTensor.dispose();
     catPred.dispose();
-    subPred.dispose();
+    if(subPred) subPred.dispose();
+
+    console.log(`[Transaction] "${description}" -> ${category}/${subcategory} (${catConf}%)`);
 
     res.json({
       input: description,
       prediction: {
         category: category.toUpperCase(),
         subcategory: subcategory,
-        confidence: {
-          category: `${catConf}%`,
-          subcategory: `${subConf}%`
+        confidence: { category: `${catConf}%`, subcategory: `${subConf}%` }
+      }
+    });
+
+  } catch (error) {
+    console.error('Trans Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==========================================
+// ROUTE 2: PREDICT INTENT (ENHANCED WITH OOD)
+// ==========================================
+app.post('/predict-intent', async (req, res) => {
+  try {
+    if (!intentModel || !intentMetadata) {
+      return res.status(503).json({ error: 'Intent Model not loaded' });
+    }
+
+    const { message } = req.body;
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: 'No message provided' });
+    }
+
+    // ★★★ SAFETY LAYER 1: KEYWORD GUARDRAILS (Pre-Model Filter) ★★★
+    const RED_FLAGS = [
+      'invest', 'crypto', 'stock', 'debt', 'loan', 'buy', 'sell', 
+      'salary', 'finance', 'money', 'budget', 'save for', 'afford',
+      'survive', 'bank', 'insurance', 'tax', 'profit', 'loss', 'worth',
+      'bitcoin', 'gold', 'property', 'car', 'house', 'wedding',
+      'unrealistic', 'opinion', 'thoughts', 'compare', 'pros and cons'
+    ];
+    
+    // Check for question starters + red flags
+    const COMPLEX_STARTERS = ['why', 'how', 'what if', 'should i', 'can i', 'explain', 'tell me about'];
+    const lowerMsg = message.toLowerCase();
+    const hasComplexStarter = COMPLEX_STARTERS.some(s => lowerMsg.startsWith(s));
+    const hasRedFlag = RED_FLAGS.some(flag => lowerMsg.includes(flag));
+
+    if ((hasComplexStarter && hasRedFlag) || (hasRedFlag && lowerMsg.split(' ').length > 5)) {
+      console.log(`[Intent] 🛡️ PRE-FILTER: Red flag combo detected in "${message}". → GROK`);
+      return res.json({
+        input: message,
+        prediction: {
+          intent: 'COMPLEX_ADVICE',
+          confidence: '100.00%',
+          reason: 'Pre-filter: Complex query detected',
+          debug: { trigger: 'keyword_guard' }
+        }
+      });
+    }
+
+    // ★★★ SAFETY LAYER 2: MODEL PREDICTION + OOD DETECTION ★★★
+    const { maxLen } = intentMetadata;
+    const sequence = preprocess(message, intentMetadata);
+
+    const inputTensor = tf.tensor2d([sequence], [1, maxLen], 'int32');
+    const prediction = intentModel.predict(inputTensor);
+    
+    // Analyze prediction with OOD detector
+    const oodAnalysis = detectOOD(message, sequence, prediction, intentMetadata);
+    
+    const predData = prediction.dataSync();
+    const maxIdx = predData.indexOf(Math.max(...predData));
+    const { intentIndex } = intentMetadata;
+    const predictedIntent = intentIndex[String(maxIdx)] || intentIndex[maxIdx] || 'UNKNOWN';
+    const confidence = (predData[maxIdx] * 100).toFixed(2);
+
+    inputTensor.dispose();
+    prediction.dispose();
+
+    // ★★★ DECISION LOGIC ★★★
+    let finalIntent = predictedIntent;
+    let logMsg = `[Intent] "${message}" -> ${predictedIntent} (${confidence}%)`;
+
+    if (oodAnalysis.isOOD) {
+      finalIntent = 'COMPLEX_ADVICE';
+      logMsg += ` -> 🚫 OOD DETECTED: ${oodAnalysis.reasons.join(', ')} → GROK`;
+    } else {
+      logMsg += ` -> ✅ LOCAL REPLY (passed OOD checks)`;
+    }
+    
+    console.log(logMsg);
+
+    res.json({
+      input: message,
+      prediction: {
+        intent: finalIntent,
+        original_intent: predictedIntent,
+        confidence: `${confidence}%`,
+        ood_analysis: {
+          is_ood: oodAnalysis.isOOD,
+          reasons: oodAnalysis.reasons,
+          entropy: oodAnalysis.entropy?.toFixed(3),
+          gap: oodAnalysis.gap?.toFixed(3)
         }
       }
     });
 
   } catch (error) {
-    console.error('Server Error:', error);
-    res.status(500).json({ error: 'Prediction failed', details: error.message });
+    console.error('Intent Error:', error);
+    // Safe fallback
+    res.json({ 
+      prediction: { 
+        intent: 'COMPLEX_ADVICE',
+        reason: 'Error occurred, routing to Grok for safety'
+      } 
+    });
   }
 });
 
+// ==========================================
+// ROUTE 3: HEALTH CHECK
+// ==========================================
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'online',
+    models: {
+      transaction: !!transModel,
+      intent: !!intentModel
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.listen(PORT, async () => {
-  await loadModel();
-  console.log(`Server running on http://localhost:${PORT}`);
+  await loadModels();
+  console.log(`🚀 Unified AI Server running on http://localhost:${PORT}`);
+  console.log(`   - POST /predict-transaction`);
+  console.log(`   - POST /predict-intent (with OOD detection)`);
+  console.log(`   - GET  /health`);
 });
