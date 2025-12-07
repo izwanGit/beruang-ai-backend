@@ -73,22 +73,31 @@ function autoCorrect(tokens, wordIndex) {
 
 // --- HELPER: Text Preprocessing ---
 function preprocess(text, metadata) {
-  const { wordIndex, maxLen, maxVocabSize } = metadata;
+  const { wordIndex, maxLen, maxVocabSize, vocabSize } = metadata;
   
-  const cleanText = text.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+  // Use vocabSize if maxVocabSize is not available (for backward compatibility)
+  const vocabLimit = maxVocabSize || vocabSize || 10000;
+  
+  // Match training preprocessing: lowercase, remove special chars, normalize whitespace
+  const cleanText = text.toLowerCase()
+    .replace(/[^\w\s]/g, ' ')  // Remove special chars but keep alphanumeric
+    .replace(/\s+/g, ' ')      // Normalize whitespace
+    .trim();
+  
   let tokens = cleanText.split(' ').filter(t => t.trim() !== '');
   
   // Apply Auto-Correct
   const correctedTokens = autoCorrect(tokens, wordIndex);
   
-  // Convert to Sequence
+  // Convert to Sequence - match training logic
   const sequence = correctedTokens.map(word => {
     const index = wordIndex[word];
-    return (index && index < maxVocabSize) ? index : 1; // 1 is <UNK>
-  });
+    // Return index if valid, otherwise UNK (1)
+    return (index !== undefined && index < vocabLimit) ? index : 1; // 1 is <UNK>
+  }).slice(0, maxLen); // Truncate if too long
 
-  // Pad
-  if (sequence.length > maxLen) {
+  // Pad to the left (match training: left padding)
+  if (sequence.length >= maxLen) {
     return sequence.slice(0, maxLen);
   }
   const pad = new Array(maxLen - sequence.length).fill(0);
