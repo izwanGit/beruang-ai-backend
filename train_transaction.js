@@ -1,6 +1,10 @@
 // ============================================================
 //  BERUANG AI - TRANSACTION CLASSIFIER TRAINER (V10 - GENIUS EDITION)
+//  MODIFIED: apply oversampling to realize computed class weights
 // ============================================================
+
+const util = require('util');
+util.isNullOrUndefined = util.isNullOrUndefined || ((value) => value === null || value === undefined);
 
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs');
@@ -30,21 +34,25 @@ const CONFIG = {
   denseUnits: 64,      // Reduced dense layer
   denseUnits2: 32,     // Second dense layer (reduced)
   
-  // Learning Rate
-  initialLearningRate: 0.001,
+  // Learning Rate - Increased to help model learn faster
+  initialLearningRate: 0.002,
   learningRateDecay: 0.95,
   minLearningRate: 0.00001,
   
-  // REGULARIZATION - Increased to prevent overfitting
-  dropoutRate: 0.5,     // Increased to prevent overfitting
-  recurrentDropout: 0.3,
-  l2Regularization: 0.01, // Increased to prevent overfitting
+  // REGULARIZATION - Reduced to allow learning
+  dropoutRate: 0.3,     // Reduced to allow model to learn
+  recurrentDropout: 0.2,
+  l2Regularization: 0.001, // Reduced to allow model to learn
   
   // Data augmentation
   useDataAugmentation: true,
   
   // Class weights for imbalanced data
-  useClassWeights: true
+  useClassWeights: true,
+
+  // When applying oversampling to approximate class weights, cap repeats to avoid
+  // exploding dataset size. Set to 10 by default (increased for better balancing).
+  oversampleMaxRepeat: 10
 };
 
 // ========================= GLOBALS =========================
@@ -133,7 +141,7 @@ async function loadData() {
         
         // Build vocabulary
         processedDesc.split(' ').forEach(word => {
-          if (word && word.length > 0 && !wordIndex[word] && nextIndex < CONFIG.maxVocabSize) {
+          if (word && word.length > 0 && wordIndex[word] === undefined && nextIndex < CONFIG.maxVocabSize) {
             wordIndex[word] = nextIndex++;
           }
         });
@@ -151,20 +159,20 @@ async function loadData() {
         }
         
         // Track categories - ensure proper 0-based indexing
-        if (!categoryToId[cat]) {
+        if (categoryToId[cat] === undefined) {
           const id = Object.keys(categoryToId).length;
           categoryToId[cat] = id;
           // Only set if not already set (prevent duplicates)
-          if (!idToCategory[id]) {
+          if (idToCategory[id] === undefined) {
             idToCategory[id] = cat;
           }
         }
         
-        if (!subcategoryToId[subcat]) {
+        if (subcategoryToId[subcat] === undefined) {
           const id = Object.keys(subcategoryToId).length;
           subcategoryToId[subcat] = id;
           // Only set if not already set (prevent duplicates)
-          if (!idToSubcategory[id]) {
+          if (idToSubcategory[id] === undefined) {
             idToSubcategory[id] = subcat;
           }
         }
@@ -185,7 +193,6 @@ async function loadData() {
       });
       
       // Update globals - remap all data
-      const oldCategoryToId = { ...categoryToId };
       Object.keys(categoryToId).forEach(cat => {
         categoryToId[cat] = cleanCategoryToId[cat];
       });
@@ -352,7 +359,7 @@ function createGeniusModel() {
     name: 'category_branch'
   }).apply(dropout3);
   
-  const categoryDropout = tf.layers.dropout({ rate: 0.3 }).apply(categoryBranch);
+  const categoryDropout = tf.layers.dropout({ rate: 0.2 }).apply(categoryBranch);
   
   const categoryOutput = tf.layers.dense({
     units: Object.keys(categoryToId).length,
@@ -381,8 +388,7 @@ function createGeniusModel() {
     outputs: [categoryOutput, subcategoryOutput]
   });
   
-  // Compile with higher weight for category to force learning
-  // Category is binary (easier) but model is ignoring it, so we need to emphasize it
+  // Compile with balanced weights initially - will be adjusted dynamically during training
   model.compile({
     optimizer: tf.train.adam(CONFIG.initialLearningRate),
     loss: {
@@ -390,8 +396,8 @@ function createGeniusModel() {
       'subcategory_output': 'categoricalCrossentropy'
     },
     lossWeights: {
-      'category_output': 0.8,  // Increased to force category learning
-      'subcategory_output': 0.2  // Reduced since it's already learning well
+      'category_output': 0.6,  // Start balanced
+      'subcategory_output': 0.4
     },
     metrics: ['accuracy']
   });
@@ -404,7 +410,7 @@ function createGeniusModel() {
   console.log(`   Subcategory Branch: 64 units (dedicated)`);
   console.log(`   Dropout: ${CONFIG.dropoutRate} (LSTM), 0.3/0.2 (Dense)`);
   console.log(`   L2 Regularization: ${CONFIG.l2Regularization}`);
-  console.log(`   Loss Weights: Category=0.8, Subcategory=0.2 (emphasizing category)\n`);
+  console.log(`   Loss Weights: Category=0.6, Subcategory=0.4 (balanced, will adjust dynamically)\n`);
   
   return model;
 }
@@ -425,8 +431,8 @@ async function train() {
     });
     
     // Split each category group proportionally
-    const trainData = [];
-    const valData = [];
+    let trainData = [];
+    let valData = [];
     
     Object.keys(categoryGroups).forEach(cat => {
       const group = categoryGroups[cat];
@@ -483,15 +489,72 @@ async function train() {
       categoryWeights = {};
       subcategoryWeights = {};
       
+      // Map to IDs (categoryToId is mapping from category string to id)
       Object.keys(catWeights).forEach(cat => {
-        categoryWeights[categoryToId[cat]] = catWeights[cat];
+        const id = categoryToId[cat];
+        if (id !== undefined) categoryWeights[id] = catWeights[cat];
       });
       
       Object.keys(subcatWeights).forEach(subcat => {
-        subcategoryWeights[subcategoryToId[subcat]] = subcatWeights[subcat];
+        const id = subcategoryToId[subcat];
+        if (id !== undefined) subcategoryWeights[id] = subcatWeights[subcat];
       });
       
-      console.log('⚖️  Class Weights Applied\n');
+      console.log('⚖️  Class Weights computed (will be applied via oversampling)\n');
+      
+      // APPLY OVERSAMPLING based on categoryWeights (since tfjs.fit doesn't support multi-output classWeight)
+      // This converts class weights into duplicated samples for minority classes.
+      const maxRepeat = CONFIG.oversampleMaxRepeat || 10;
+      
+      // Calculate target counts for balanced dataset
+      const catCounts = {};
+      trainData.forEach(item => {
+        const catId = item.catId;
+        catCounts[catId] = (catCounts[catId] || 0) + 1;
+      });
+      
+      // Find the majority class count
+      const maxCount = Math.max(...Object.values(catCounts));
+      
+      // Calculate how many times each class needs to be repeated to balance
+      const augmented = [];
+      for (const item of trainData) {
+        const catId = item.catId;
+        const currentCount = catCounts[catId];
+        const rawWeight = categoryWeights[catId] || 1;
+        
+        // More aggressive oversampling: aim for near-balance
+        // Calculate repeats based on weight, but ensure minority class gets more samples
+        let repeats = Math.min(maxRepeat, Math.max(1, Math.round(rawWeight * 1.5)));
+        
+        // If this is the minority class, ensure it gets at least enough to be close to balanced
+        if (currentCount < maxCount * 0.8) {
+          const targetRepeats = Math.ceil(maxCount / currentCount);
+          repeats = Math.min(maxRepeat, Math.max(repeats, targetRepeats));
+        }
+        
+        for (let r = 0; r < repeats; r++) augmented.push(item);
+      }
+      
+      // Verify the balance after oversampling
+      const newCatCounts = {};
+      augmented.forEach(item => {
+        const catId = item.catId;
+        newCatCounts[catId] = (newCatCounts[catId] || 0) + 1;
+      });
+      
+      console.log(`   Oversampling applied: train samples ${trainData.length} → ${augmented.length} (maxRepeat=${maxRepeat})`);
+      console.log(`   Post-oversampling distribution:`, Object.keys(newCatCounts).map(id => 
+        `${idToCategory[id]}=${newCatCounts[id]} (${((newCatCounts[id]/augmented.length)*100).toFixed(1)}%)`
+      ).join(', '));
+      
+      // Shuffle the augmented data to ensure proper mixing
+      for (let i = augmented.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [augmented[i], augmented[j]] = [augmented[j], augmented[i]];
+      }
+      
+      trainData = augmented;
     }
     
     // Prepare data
@@ -600,23 +663,30 @@ async function train() {
     let patienceCounter = 0;
     let bestEpoch = 0;
     let currentLR = CONFIG.initialLearningRate;
-    let catWeight = 0.8, subWeight = 0.2; // Initialize
+    let catWeight = 0.6, subWeight = 0.4; // Initialize
+    let prevValCatAcc = 0; // Track previous validation category accuracy
     
     for (let epoch = 0; epoch < CONFIG.epochs; epoch++) {
-      // Dynamic loss weights: Focus on category early, then balance
-      if (epoch < 5) {
-        // First 5 epochs: Focus heavily on category
-        catWeight = 0.9;
-        subWeight = 0.1;
-      } else if (epoch < 15) {
-        // Next 10 epochs: Gradually balance
-        const progress = (epoch - 5) / 10;
-        catWeight = 0.9 - (progress * 0.3); // 0.9 -> 0.6
-        subWeight = 0.1 + (progress * 0.3); // 0.1 -> 0.4
+      // Dynamic loss weights: Start balanced, then adjust based on performance
+      // If category accuracy is low, increase its weight
+      if (epoch === 0) {
+        // First epoch: Balanced to let model learn both
+        catWeight = 0.6;
+        subWeight = 0.4;
+      } else if (epoch < 10) {
+        // Early epochs: Focus on category if it's struggling
+        // Check if category accuracy is below 60%, if so, increase weight
+        if (prevValCatAcc < 0.6) {
+          catWeight = 0.8;
+          subWeight = 0.2;
+        } else {
+          catWeight = 0.6;
+          subWeight = 0.4;
+        }
       } else {
-        // Later epochs: Balanced but still favor category
-        catWeight = 0.7;
-        subWeight = 0.3;
+        // Later epochs: Balanced
+        catWeight = 0.6;
+        subWeight = 0.4;
       }
       
       // Learning rate decay
@@ -641,27 +711,14 @@ async function train() {
         metrics: ['accuracy']
       });
       
-      // Custom training step with class weights
-      let history;
-      if (categoryWeights && subcategoryWeights) {
-        // For class weights, we need to use a custom training loop
-        // But TensorFlow.js doesn't support sample weights easily, so we'll use balanced loss
-        history = await model.fit(xTrain, [yTrainCat, yTrainSub], {
-          batchSize: CONFIG.batchSize,
-          epochs: 1,
-          validationData: [xVal, [yValCat, yValSub]],
-          shuffle: true,
-          verbose: 0
-        });
-      } else {
-        history = await model.fit(xTrain, [yTrainCat, yTrainSub], {
-          batchSize: CONFIG.batchSize,
-          epochs: 1,
-          validationData: [xVal, [yValCat, yValSub]],
-          shuffle: true,
-          verbose: 0
-        });
-      }
+      // Standard training call (we applied class balancing via oversampling earlier)
+      const history = await model.fit(xTrain, [yTrainCat, yTrainSub], {
+        batchSize: CONFIG.batchSize,
+        epochs: 1,
+        validationData: [xVal, [yValCat, yValSub]],
+        shuffle: true,
+        verbose: 0
+      });
       
       // Extract metrics - TensorFlow.js uses different key names
       const metrics = history.history;
@@ -692,6 +749,9 @@ async function train() {
       // Always use manual calculation for validation (more reliable)
       valCatAcc = manualValCatAcc;
       valSubAcc = manualValSubAcc;
+      
+      // Update previous accuracy for next epoch's weight adjustment
+      prevValCatAcc = valCatAcc;
       
       // Debug: Check predictions on first few epochs
       if (epoch < 3) {
@@ -741,10 +801,9 @@ async function train() {
         const metadata = {
           wordIndex,
           maxLen: CONFIG.maxLen,
-          maxVocabSize: CONFIG.maxVocabSize,  // Add for server compatibility
-          vocabSize: nextIndex,
           categoryIndex: idToCategory,
           subcategoryIndex: idToSubcategory,
+          vocabSize: nextIndex,
           performance: {
             category_accuracy: bestValCatAcc,
             subcategory_accuracy: bestValSubAcc,
