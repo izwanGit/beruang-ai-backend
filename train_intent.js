@@ -1,171 +1,120 @@
 const util = require('util');
 util.isNullOrUndefined = util.isNullOrUndefined || ((value) => value === null || value === undefined);
-util.isArray = Array.isArray;
-
-const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs-extra');
 const csv = require('csv-parser');
+const tf = require('@tensorflow/tfjs-node');
+const { pipeline } = require('@xenova/transformers');
 
-// --- CONFIG ---
-const DATASET_PATH = './chat_intents.csv'; 
-const MODEL_SAVE_PATH = 'file://./model_intent';
-const METADATA_SAVE_PATH = './model_intent/metadata.json';
-
-const MAX_VOCAB_SIZE = 3000; 
-const MAX_LEN = 20; 
-const VALIDATION_SPLIT = 0.2;
-
-// --- GLOBALS ---
-const data = [];
-const wordIndex = { '<UNK>': 1 };
-let wordCounter = 2;
-const intentIndex = {};
-
-async function loadData() {
-  console.log('Loading Intent Dataset...');
-  return new Promise((resolve, reject) => {
-    fs.createReadStream(DATASET_PATH)
-      .pipe(csv())
-      .on('data', (row) => {
-        const message = row.text?.toLowerCase().replace(/[^a-z0-9\s]/g, '') || '';
-        const intent = row.intent ? row.intent.trim() : '';
-        if (!message || !intent) return;
-
-        data.push({ message, intent });
-
-        message.split(' ').forEach((word) => {
-          if (word && !wordIndex[word] && wordCounter < MAX_VOCAB_SIZE) {
-               wordIndex[word] = wordCounter++;
-          }
-        });
-      })
-      .on('end', () => {
-        if (data.length < 2) return reject(new Error('Dataset too small.'));
-        [...new Set(data.map(r => r.intent))].sort().forEach((c, i) => intentIndex[c] = i);
-        console.log(`Dataset loaded. Samples: ${data.length}, Intents: ${Object.keys(intentIndex).length}`);
-        resolve();
-      })
-      .on('error', reject);
-  });
-}
-
-function vectorizeSamples(samples) {
-  const sequences = samples.map(row => {
-    return row.message.split(' ').map(w => wordIndex[w] || 1).slice(0, MAX_LEN);
-  });
-  const padded = sequences.map(seq => {
-    const pad = new Array(MAX_LEN - seq.length).fill(0);
-    return [...pad, ...seq];
-  });
-  
-  const depth = Object.keys(intentIndex).length;
-  const indices = samples.map(r => intentIndex[r.intent]);
-  const buffer = tf.buffer([indices.length, depth], 'float32');
-  indices.forEach((c, i) => buffer.set(1, i, c));
-
-  return {
-    x: tf.tensor2d(padded, [samples.length, MAX_LEN], 'int32'),
-    y: buffer.toTensor()
-  };
-}
-
-function createModel() {
-  const input = tf.input({ shape: [MAX_LEN] });
-  let x = tf.layers.embedding({ inputDim: MAX_VOCAB_SIZE, outputDim: 64, inputLength: MAX_LEN }).apply(input);
-  x = tf.layers.bidirectional({ layer: tf.layers.lstm({ units: 64, returnSequences: false }) }).apply(x);
-  x = tf.layers.dropout({ rate: 0.5 }).apply(x);
-  x = tf.layers.dense({ units: 64, activation: 'relu' }).apply(x);
-  x = tf.layers.dropout({ rate: 0.5 }).apply(x);
-  const output = tf.layers.dense({ units: Object.keys(intentIndex).length, activation: 'softmax' }).apply(x);
-
-  const model = tf.model({ inputs: input, outputs: output });
-  model.compile({ optimizer: 'adam', loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
-  return model;
-}
-
-// --- EVALUATION ---
-function evaluateModel(model, trainData, valData) {
-    console.log('\n--- Final Evaluation ---');
-    const xAll = tf.concat([trainData.x, valData.x], 0);
-    const yAll = tf.concat([trainData.y, valData.y], 0);
-    
-    const predictions = model.predict(xAll);
-    const accTensor = tf.metrics.categoricalAccuracy(yAll, predictions).mean();
-    console.log(`Overall Intent Accuracy: ${(accTensor.dataSync()[0] * 100).toFixed(2)}%`);
-    
-    xAll.dispose(); yAll.dispose(); predictions.dispose(); accTensor.dispose();
-}
+// --- CONFIGURATION ---
+const CONFIG = {
+    datasetPath: './chat_intents.csv',
+    modelDir: './model_intent',
+    epochs: 25,
+    batchSize: 64, 
+    embeddingDim: 384,
+    splitRatio: 0.8
+};
 
 async function main() {
-  try {
-    await loadData();
-    tf.util.shuffle(data);
-    const splitIdx = Math.floor(data.length * VALIDATION_SPLIT);
-    const trainData = vectorizeSamples(data.slice(splitIdx));
-    const valData = vectorizeSamples(data.slice(0, splitIdx));
-
-    const model = createModel();
-    model.summary();  // Add this line to match your output (prints architecture)
-    console.log('Training Intent Model...');
-    
-    let bestValAcc = 0;
-    let patience = 0;
-    let bestWeights = null;
-
-    await model.fit(trainData.x, trainData.y, {
-      epochs: 30, 
-      batchSize: 32,
-      validationData: [valData.x, valData.y],
-      verbose: 0,
-      callbacks: {
-          onEpochEnd: async (epoch, logs) => {
-              // Manual validation check
-              const preds = model.predict(valData.x);
-              const valAccTensor = tf.metrics.categoricalAccuracy(valData.y, preds).mean();
-              const valAcc = valAccTensor.dataSync()[0];
-              valAccTensor.dispose(); preds.dispose();
-
-              console.log(
-                  `Epoch ${String(epoch + 1).padStart(2, '0')} | ` +
-                  `Loss: ${logs.loss.toFixed(4)} | ` +
-                  `Train Acc: ${(logs.acc*100).toFixed(1)}% | ` +
-                  `Val Acc: ${(valAcc*100).toFixed(1)}%`
-              );
-
-              if (valAcc > bestValAcc) {
-                  bestValAcc = valAcc;
-                  patience = 0;
-                  // Save best weights manually
-                  if (bestWeights) bestWeights.forEach(w => w.dispose());
-                  bestWeights = model.getWeights().map(w => w.clone());
-              } else {
-                  patience++;
-                  if (patience >= 5) {
-                      console.log(`   ⚠ Early Stopping triggered (No improvement for 5 epochs).`);
-                      model.stopTraining = true;
-                  }
-              }
-          }
-      }
+    console.log('\n[1/6] 📂 Loading dataset...');
+    const rawData = [];
+    await new Promise((resolve) => {
+        fs.createReadStream(CONFIG.datasetPath)
+            .pipe(csv())
+            .on('data', (row) => { if(row.text && row.intent) rawData.push(row); })
+            .on('end', resolve);
     });
 
-    if (bestWeights) {
-        console.log('Restoring best intent weights...');
-        model.setWeights(bestWeights);
+    const uniqueIntents = [...new Set(rawData.map(r => r.intent))].sort();
+    const intentMap = {}; 
+    const labelMap = {};
+    uniqueIntents.forEach((intent, i) => { intentMap[intent] = i; labelMap[i] = intent; });
+
+    console.log(`      > Loaded ${rawData.length} samples.`);
+    console.log(`      > Found ${uniqueIntents.length} distinct intents.`);
+
+    console.log('\n[2/6] 🧠 Loading MiniLM...');
+    const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    
+    console.log('\n[3/6] ⚡ Generating Embeddings (Large batch)...');
+    tf.util.shuffle(rawData);
+    
+    const features = [];
+    const labels = [];
+    const total = rawData.length;
+    
+    for (let i = 0; i < total; i++) {
+        const output = await extractor(rawData[i].text, { pooling: 'mean', normalize: true });
+        features.push(Array.from(output.data));
+        labels.push(intentMap[rawData[i].intent]);
+        if ((i + 1) % 1000 === 0) process.stdout.write(`      > ${i + 1}/${total} done...\r`);
+    }
+    console.log(`\n      > Done.`);
+
+    const splitIdx = Math.floor(features.length * CONFIG.splitRatio);
+    const xs = tf.tensor2d(features);
+    const ys = tf.oneHot(tf.tensor1d(labels, 'int32'), uniqueIntents.length);
+
+    const xTrain = xs.slice([0, 0], [splitIdx, -1]);
+    const yTrain = ys.slice([0, 0], [splitIdx, -1]);
+    const xVal = xs.slice([splitIdx, 0], [-1, -1]);
+    const yVal = ys.slice([splitIdx, 0], [-1, -1]);
+
+    console.log('\n[4/6] 🏗️  Training Neural Network...');
+    const model = tf.sequential();
+    // Larger network for more complex decision boundaries
+    model.add(tf.layers.dense({ inputShape: [CONFIG.embeddingDim], units: 256, activation: 'relu' }));
+    model.add(tf.layers.dropout({ rate: 0.5 })); // Increased dropout for generalization
+    model.add(tf.layers.dense({ units: 128, activation: 'relu' }));
+    model.add(tf.layers.dense({ units: uniqueIntents.length, activation: 'softmax' }));
+
+    model.compile({ optimizer: 'adam', loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
+
+    await model.fit(xTrain, yTrain, {
+        epochs: CONFIG.epochs,
+        batchSize: CONFIG.batchSize,
+        validationData: [xVal, yVal],
+        callbacks: {
+            onEpochEnd: (epoch, logs) => {
+                console.log(`      Epoch ${String(epoch + 1).padStart(2)} | Loss: ${logs.loss.toFixed(4)} | Acc: ${(logs.acc*100).toFixed(1)}% | Val: ${(logs.val_acc*100).toFixed(1)}%`);
+            }
+        }
+    });
+
+    console.log('\n[6/6] 📊 Classification Report (Validation Set):');
+    const valPreds = model.predict(xVal).argMax(-1).dataSync();
+    const valTrues = yVal.argMax(-1).dataSync();
+    
+    const stats = {};
+    Object.values(labelMap).forEach(c => stats[c] = { tp:0, fp:0, fn:0, count:0 });
+
+    for(let i=0; i<valTrues.length; i++) {
+        const t = labelMap[valTrues[i]];
+        const p = labelMap[valPreds[i]];
+        if(stats[t]) {
+            stats[t].count++;
+            if(t===p) stats[t].tp++;
+            else { stats[p].fp++; stats[t].fn++; }
+        }
     }
 
-    evaluateModel(model, trainData, valData);
-
-    await fs.ensureDir('./model_intent');
-    await model.save(MODEL_SAVE_PATH);
-    await fs.writeJson(METADATA_SAVE_PATH, { 
-      wordIndex, maxLen: MAX_LEN, maxVocabSize: MAX_VOCAB_SIZE, 
-      intentIndex: Object.fromEntries(Object.entries(intentIndex).map(([k, v]) => [v, k]))
+    console.log('--------------------------------------------------------------------------------');
+    console.log('Intent'.padEnd(30) + '| Precision | Recall  | F1-Score | Samples');
+    console.log('--------------------------------------------------------------------------------');
+    Object.keys(stats).sort().forEach(c => {
+        const s = stats[c];
+        if(s.count === 0) return;
+        const prec = s.tp / (s.tp + s.fp) || 0;
+        const rec = s.tp / (s.tp + s.fn) || 0;
+        const f1 = 2 * ((prec*rec)/(prec+rec)) || 0;
+        console.log(c.padEnd(30) + `|   ${(prec*100).toFixed(0)}%    ` + `|   ${(rec*100).toFixed(0)}%   ` + `|   ${f1.toFixed(2)}   ` + `|   ${s.count}`);
     });
-    console.log('✅ Intent Model Saved successfully.');
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
+    console.log('--------------------------------------------------------------------------------');
+
+    await fs.ensureDir(CONFIG.modelDir);
+    await model.save(`file://${CONFIG.modelDir}`);
+    await fs.writeJson(`${CONFIG.modelDir}/metadata.json`, { labelMap });
+    console.log('✅ Model Saved.');
 }
 
-main();
+main().catch(console.error);
