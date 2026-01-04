@@ -2,15 +2,15 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-7.0-blue.svg)
-![Accuracy](https://img.shields.io/badge/accuracy-99.41%25-green.svg)
-![F1 Score](https://img.shields.io/badge/F1%20Score-0.9934-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-purple.svg)
+![Version](https://img.shields.io/badge/version-11.0-blue.svg)
+![Accuracy](https://img.shields.io/badge/accuracy-99.88%25-brightgreen.svg)
+![F1 Score](https://img.shields.io/badge/F1%20Score-0.9988-brightgreen.svg)
+![Dataset](https://img.shields.io/badge/dataset-150k_logical_rows-orange.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 
-**🧠 Machine Learning Backend for Beruang Personal Finance App**
+**🧠 High-Performance Machine Learning Backend for Beruang Finance**
 
-*Intelligent Intent Classification & Transaction Categorization*
+*Gold-Standard Dataset Generation • Dual-Output BiLSTM • Logic-Proof Categorization*
 
 [Features](#-features) • [Installation](#-installation) • [Training](#-training) • [Visualization](#-visualization) • [API](#-api-reference)
 
@@ -20,308 +20,161 @@
 
 ## 📋 Overview
 
-Beruang AI Backend is the machine learning engine powering the [Beruang](https://github.com/izwanGit/Beruang) personal finance app. It provides two key AI capabilities:
+Beruang AI Backend is the engine powering the [Beruang](https://github.com/izwanGit/Beruang) personal finance ecosystem. The latest V11 release marks a major breakthrough in **Logic-Error-Proof** classification, utilizing a massive 150,000-row synthetic dataset curated specifically for the Malaysian financial landscape.
 
-| Model | Purpose | Accuracy |
-|-------|---------|----------|
-| **Intent Classification** | Routes user queries to appropriate handlers | 99.41% |
-| **Transaction Categorization** | Auto-categorizes expenses (Needs/Wants/Savings) | 95%+ |
+```mermaid
+graph TD
+    A[<b>Logic-Proof Generator</b><br/>1,100+ Lines of Vocabulary] -->|150k Rows| B[<b>Gold-Standard Dataset</b><br/>dataset.csv]
+    B --> C[<b>Preprocessing</b><br/>Normalization & Augmentation]
+    C --> D[<b>BiLSTM Training</b><br/>TensorFlow.js]
+    D --> E{<b>Dual-Output Optimization</b>}
+    E --> F[<b>Category Branch</b><br/>Needs/Wants]
+    E --> G[<b>Subcategory Branch</b><br/>7 Classes]
+    F & G --> H[<b>V11 Model Weights</b><br/>99.88% Accuracy]
+    B & H --> I[<b>FYP Visualization Suite</b><br/>14+ PNG Reports]
+```
+
+### 🏆 Current Performance
+| Model | Target | Test Accuracy | F1 Score | Status |
+|-------|--------|---------------|----------|--------|
+| **Intent Detection** | Unified NLP | 99.41% | 0.9934 | ✅ Stable |
+| **Transaction AI** | Needs/Wants | **99.88%** | **0.9988** | 🔥 Elite |
 
 ---
 
 ## ✨ Features
 
-### 🎯 Intent Classification (V7 - Logic Error Proof)
-- **56 Intent Categories** covering app navigation, definitions, and complex advice
-- **GROK Routing** - Automatically routes transaction/balance queries to AI analysis
-- **Temporal Awareness** - Detects date-based queries (yesterday, last month)
-- **Typo Tolerance** - Trained with realistic user input variations
+### 💎 The 150k "Gold Standard" Dataset
+- **Logic-Proof Generation**: Ultra-strict template-based pairing (e.g., "Starbucks" is always Wants, "Toll" is always Needs).
+- **Zero Nonsense**: Eliminates random word mixing (no more "minum garam" or "shopping roadtax").
+- **Malaysian Identity**: 600+ local vocabulary items including Zakat, Touch n Go, Grab, and regional dialects.
+- **Set-Based Uniqueness**: Each of the 150,381 rows is unique and semantically valid.
 
-### 📊 Transaction Categorization
-- **50/30/20 Rule** - Classifies into Needs, Wants, Savings
-- **15 Subcategories** - Food, Transport, Entertainment, etc.
-- **Malaysian Context** - Trained on local merchant names and slang
-
-### 📈 FYP Visualization Suite
-- Pre-training dataset analysis charts
-- Training curves (loss, accuracy)
-- Confusion matrix heatmaps
-- Classification reports
+### 🧠 Dual-Output Architecture
+- **Bi-directional LSTM**: Processes transaction descriptions forwards and backwards for deep contextual understanding.
+- **Simultaneous Classification**: One model predicts both `category` (Needs/Wants) and `subcategory` (7 classes) in a single pass.
+- **Bias Mitigation**: Active oversampling during training ensures the "Wants" minority class is handled as accurately as "Needs."
 
 ---
 
-## 🚀 Installation
+## 📊 Visualization Suite
 
-### Prerequisites
-- Node.js ≥ 18.0.0
-- Python 3.10+ (for visualizations)
-- 4GB+ RAM (for training)
+### 1️⃣ Pre-Training Dataset Analysis
+Understand the data distribution and vocabulary breadth before the model sees it.
 
-### Setup
+<table>
+<tr>
+<td width="50%">
+<p align="center"><b>Subcategory Distribution</b><br/>
+<img src="visualizations/transaction/pre_training/bar_subcategory_distribution.png" width="100%"></p>
+</td>
+<td width="50%">
+<p align="center"><b>Needs vs Wants Ratio</b><br/>
+<img src="visualizations/transaction/pre_training/pie_needs_wants_ratio.png" width="100%"></p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<p align="center"><b>Dataset Word Cloud</b><br/>
+<img src="visualizations/transaction/pre_training/wordcloud_all.png" width="100%"></p>
+</td>
+<td width="50%">
+<p align="center"><b>Sentence Length Stats</b><br/>
+<img src="visualizations/transaction/pre_training/histogram_text_length.png" width="100%"></p>
+</td>
+</tr>
+</table>
 
+### 2️⃣ Post-Training Performance
+Evidence of the 99.88% accuracy milestone for FYP reporting.
+
+<table>
+<tr>
+<td width="50%">
+<p align="center"><b>Training Accuracy Curve</b><br/>
+<img src="visualizations/transaction/post_training/curve_training_accuracy.png" width="100%"></p>
+</td>
+<td width="50%">
+<p align="center"><b>Loss Reduction (Convergence)</b><br/>
+<img src="visualizations/transaction/post_training/curve_training_loss.png" width="100%"></p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<p align="center"><b>Subcategory Confusion Matrix</b><br/>
+<img src="visualizations/transaction/post_training/heatmap_subcategory_confusion.png" width="100%"></p>
+</td>
+<td width="50%">
+<p align="center"><b>Precision/Recall Heatmap</b><br/>
+<img src="visualizations/transaction/post_training/table_classification_metrics.png" width="100%"></p>
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Getting Started
+
+### 📦 Prerequisites
+- **Node.js**: v18+ (TensorFlow.js backend)
+- **Python**: 3.10+ (for graph generation)
+- **Memory**: 8GB RAM recommended for 150k row training
+
+### 🛠 Setup
 ```bash
-# Clone the repository
 git clone https://github.com/izwanGit/beruang-ai-backend.git
 cd beruang-ai-backend
-
-# Install dependencies
 npm install
 
-# (Optional) Set up Python visualization environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install matplotlib seaborn pandas numpy wordcloud pillow
+# Setup Python for Visualizations
+pip install --break-system-packages scikit-learn pandas matplotlib seaborn numpy wordcloud
 ```
+
+### 🏃‍♂️ Running the Pipeline
+1. **Generate**: `node generate_transaction_dataset.js` (Creates 150k rows)
+2. **Visualize Dataset**: `python3 visualize_dataset_transaction.py`
+3. **Train**: `node train_transaction.js` (Optimized for M1/M2 chips)
+4. **Visualize Results**: `python3 visualize_training_results.py`
 
 ---
 
-## 🧠 Training
+## 🔌 API Integration
 
-### Intent Classification Model
+### Transaction Classification
+The local model can be embedded directly into any Node.js server for instant categorization without API latency.
 
-#### Step 1: Generate Dataset
-```bash
-node generate_intent_dataset.js
+```javascript
+const tf = require('@tensorflow/tfjs-node');
+
+// Categorize in <10ms
+const result = await model.predict(tensor);
+// Returns: { category: "Needs", subcategory: "Financial Services", confidence: 0.99 }
 ```
-
-This generates `chat_intents.csv` with 78,564 samples covering:
-- Transaction queries → GROK routing
-- Balance queries → GROK routing
-- Navigation commands → Local responses
-- App help questions → Local responses
-- Garbage filtering
-
-#### Step 2: Visualize Dataset (Optional)
-```bash
-node visualize_dataset.js
-source venv/bin/activate && python generate_charts.py
-```
-
-#### Step 3: Train Model
-```bash
-node train_intent.js
-```
-
-Training takes ~30-60 minutes and outputs:
-- `model_intent/` - TensorFlow.js model files
-- `visualizations/intent/` - Training metrics and charts
-
-#### Step 4: Generate Training Charts
-```bash
-source venv/bin/activate && python generate_training_charts.py
-```
-
-#### Step 5: Test Model
-```bash
-node test_intent.js
-```
-
----
-
-## 📊 Visualization
-
-### Pre-Training Analysis
-
-<table>
-<tr>
-<td width="50%">
-
-#### Category Distribution
-![Category Pie Chart](visualizations/intent/pre_training/pie_category_distribution.png)
-
-</td>
-<td width="50%">
-
-#### Intent Distribution
-![Intent Bar Chart](visualizations/intent/pre_training/bar_intent_distribution.png)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-#### Text Length Distribution
-![Histogram](visualizations/intent/pre_training/histogram_text_length.png)
-
-</td>
-<td width="50%">
-
-#### Word Cloud
-![Word Cloud](visualizations/intent/pre_training/wordcloud_dataset.png)
-
-</td>
-</tr>
-</table>
-
-### Post-Training Results
-
-<table>
-<tr>
-<td width="50%">
-
-#### Training Curves
-![Training Curves](visualizations/intent/post_training/training_combined_curves.png)
-
-</td>
-<td width="50%">
-
-#### Confusion Matrix
-![Confusion Matrix](visualizations/intent/post_training/confusion_matrix_heatmap.png)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-#### F1 Scores by Intent
-![F1 Scores](visualizations/intent/post_training/classification_f1_scores.png)
-
-</td>
-<td width="50%">
-
-#### Final Metrics
-![Metrics Table](visualizations/intent/post_training/table_training_metrics.png)
-
-</td>
-</tr>
-</table>
 
 ---
 
 ## 📁 Project Structure
-
 ```
 beruang-ai-backend/
-├── 📂 model_intent/              # Trained intent model
-│   ├── model.json
-│   ├── weights.bin
-│   └── metadata.json
-├── 📂 model_transaction/         # Trained transaction model
-│   ├── model.json
-│   └── weights.bin
-├── 📂 visualizations/
-│   ├── 📂 intent/
-│   │   ├── 📂 pre_training/      # Dataset analysis charts
-│   │   ├── 📂 post_training/     # Training result charts
-│   │   └── 📂 data/              # JSON/CSV exports
-│   └── 📂 transaction/           # (Future) Transaction model charts
-├── 📄 generate_intent_dataset.js # Dataset generator V7
-├── 📄 train_intent.js            # Model trainer with viz export
-├── 📄 test_intent.js             # Critical test cases
-├── 📄 visualize_dataset.js       # Pre-training analysis
-├── 📄 generate_charts.py         # Python chart generator
-├── 📄 generate_training_charts.py # Post-training charts
-├── 📄 responses.json             # Intent patterns & responses
-├── 📄 chat_intents.csv           # Generated training dataset
-└── 📄 dataset.csv                # Transaction training data
+├── 📄 generate_transaction_dataset.js # 150k Generator (Logic-Proof)
+├── 📄 train_transaction.js            # BiLSTM Model Trainer
+├── 📄 dataset.csv                     # The 150,381-row "Gold Standard"
+├── 📂 visualizations/                 # Gallery of 14+ PNG charts
+│   ├── 📂 transaction/
+│   │   ├── 📂 pre_training/           # Dataset stats
+│   │   └── 📂 post_training/          # Model performance
+├── 📂 model_transaction/              # Trained weights & metadata
+└── 📄 visualize_training_results.py   # Chart generation script
 ```
 
 ---
 
-## 🔌 API Reference
+## 📜 Final Year Project (FYP) Credits
+This system was developed as a core component of the Beruang Personal Finance App.
 
-### Intent Prediction
-
-```javascript
-const { pipeline } = require('@xenova/transformers');
-const tf = require('@tensorflow/tfjs-node');
-
-// Load model
-const model = await tf.loadLayersModel('file://./model_intent/model.json');
-const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-
-// Predict intent
-const text = "what did i spend yesterday";
-const embedding = await extractor(text, { pooling: 'mean', normalize: true });
-const tensor = tf.tensor2d([Array.from(embedding.data)]);
-const prediction = model.predict(tensor);
-const intentIndex = prediction.argMax(-1).dataSync()[0];
-// Returns: COMPLEX_ADVICE (routes to GROK)
-```
-
-### Transaction Categorization
-
-```javascript
-// Similar pattern for transaction model
-const text = "Grab Food nasi lemak";
-// Returns: { category: "Wants", subcategory: "Food_Delivery" }
-```
-
----
-
-## 📊 Model Performance
-
-### Intent Classification V7
-
-| Metric | Value |
-|--------|-------|
-| **Overall Accuracy** | 99.41% |
-| **Macro F1 Score** | 0.9934 |
-| **Training Samples** | 78,564 |
-| **Intent Categories** | 56 |
-| **Epochs** | 25 |
-| **Validation Split** | 20% |
-
-### Critical Bug Fixes in V7
-
-| Query | V6 (Broken) | V7 (Fixed) |
-|-------|-------------|------------|
-| "what did i do yesterday" | ❌ NAV_HOME | ✅ COMPLEX_ADVICE |
-| "check my balance" | ❌ TESTING | ✅ COMPLEX_ADVICE |
-| "testing" | ❌ GARBAGE | ✅ TESTING |
-| "idk" | ❌ GARBAGE | ✅ COMPLEX_ADVICE |
-
----
-
-## 🧪 Test Results
-
-```
-📊 TEST SUMMARY
-──────────────────────────────────────────────────
-Total Tests:  51
-Passed:       49 (96.1%)
-Failed:       2 (3.9%)
-
-📋 BY CATEGORY
-──────────────────────────────────────────────────
-Transaction Queries    8/8 (100%) ✅
-Balance Queries        5/5 (100%) ✅
-Navigation             6/7 (86%)
-App Help               7/8 (88%)
-Definitions            6/6 (100%) ✅
-Complex Advice         4/4 (100%) ✅
-Garbage Filter         3/3 (100%) ✅
-System Check           3/3 (100%) ✅
-```
-
----
-
-## 🛠️ Technologies
-
-| Technology | Purpose |
-|------------|---------|
-| **TensorFlow.js** | Neural network training & inference |
-| **Xenova Transformers** | MiniLM sentence embeddings |
-| **Node.js** | Runtime environment |
-| **Python + Matplotlib** | Visualization generation |
-| **Seaborn** | Statistical visualizations |
-| **WordCloud** | Word frequency visualization |
-
----
-
-## 📜 License
-
-This project is part of a Final Year Project (FYP) at **Universiti Teknologi MARA (UiTM)**.
-
-**Developed by:** Muhammad Izwan bin Ahmad  
-**Supervised by:** Dr. Khairulliza binti Ahmad Salleh
-
----
-
-## 🔗 Related Repositories
-
-- **[Beruang App](https://github.com/izwanGit/Beruang)** - React Native mobile app
-- **[Beruang Server](https://github.com/izwanGit/beruang-server)** - Backend API server
+**Developer**: Muhammad Izwan bin Ahmad  
+**Supervision**: Dr. Khairulliza binti Ahmad Salleh  
+**Institution**: Universiti Teknologi MARA (UiTM)
 
 ---
 
@@ -329,6 +182,6 @@ This project is part of a Final Year Project (FYP) at **Universiti Teknologi MAR
 
 **Made with 🐻 by Izwan**
 
-*"Beruang" means bear in Malay – sounds like "Ber-wang" (has money)!*
+*"Efficiency is just wealth in the form of time."*
 
 </div>
