@@ -1,0 +1,10 @@
+{
+  "total_rows": 150381,
+  "unique_rows": 150381,
+  "needs_count": 96312,
+  "wants_count": 54069,
+  "needs_percentage": 64.04532487481796,
+  "wants_percentage": 35.95467512518204,
+  "avg_description_length": 4.253416322540747,
+  "vocab_size": 1963
+}

@@ -1,0 +1,606 @@
+{
+  "needs": [
+    {
+      "description": "ikan kembung shopping jumaat",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "buy coconut jam from grocery store",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 6
+    },
+    {
+      "description": "tahu goreng with tan",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "order murukku delivery fee foodpanda",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "order mee bandung rider tip",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "clear ptptn loan dinner time",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 5
+    },
+    {
+      "description": "stock milo powder untuk mahathir",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "buy rice from grocery store",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock cooking oil untuk saras",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock bread untuk razak",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "internet bill for hamdan",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 4
+    },
+    {
+      "description": "sedekah for iqbal",
+      "category": "needs",
+      "subcategory": "Others",
+      "length": 3
+    },
+    {
+      "description": "grabcar semalam",
+      "category": "needs",
+      "subcategory": "Transportation",
+      "length": 2
+    },
+    {
+      "description": "teh halia midnight",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 3
+    },
+    {
+      "description": "topup tng reload khamis",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 4
+    },
+    {
+      "description": "foodpanda for khairul",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 3
+    },
+    {
+      "description": "lrt for nasuha",
+      "category": "needs",
+      "subcategory": "Transportation",
+      "length": 3
+    },
+    {
+      "description": "buy curry leaves from pasar pagi",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 6
+    },
+    {
+      "description": "makan tempe goreng with izwan",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "order ayam goreng shopee food",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "dinner asam laksa at restoran melayu",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 6
+    },
+    {
+      "description": "buy honey from wet market",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock ginger untuk tee",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "tapau amplang afternoon",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 3
+    },
+    {
+      "description": "stock cabbage untuk chin",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "tepung jagung shopping sabtu",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "topup maxis bill 9am",
+      "category": "needs",
+      "subcategory": "Telecommunication",
+      "length": 4
+    },
+    {
+      "description": "beli vadai at pantry office",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock fennel untuk adik",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "socar hourly for kamal",
+      "category": "needs",
+      "subcategory": "Transportation",
+      "length": 4
+    },
+    {
+      "description": "minum milo ais at kantin",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock sardin tin untuk azwan",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "stock vinegar untuk syukri",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "buy chicken from wet market",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "mycarpremium for radziah",
+      "category": "needs",
+      "subcategory": "Transportation",
+      "length": 3
+    },
+    {
+      "description": "stock sweet soy sauce untuk nadia",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 6
+    },
+    {
+      "description": "milo ais khamis",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 3
+    },
+    {
+      "description": "soy sauce shopping berbuka",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 4
+    },
+    {
+      "description": "stock rendang paste untuk adik",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "makan nasi dagang with nizam",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "hamster cage untuk chong",
+      "category": "needs",
+      "subcategory": "Others",
+      "length": 4
+    },
+    {
+      "description": "topup touch n go ewallet malam",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 6
+    },
+    {
+      "description": "delivery charge grabfood for devi",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "astro for othman",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 3
+    },
+    {
+      "description": "renew house insurance sunday",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 4
+    },
+    {
+      "description": "stock sesame oil untuk nora",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "settle credit card at ambank",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 5
+    },
+    {
+      "description": "stock dried chili untuk amin",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "restock water spinach",
+      "category": "needs",
+      "subcategory": "Food & Beverage",
+      "length": 3
+    },
+    {
+      "description": "internet bill monthly",
+      "category": "needs",
+      "subcategory": "Financial Services",
+      "length": 3
+    }
+  ],
+  "wants": [
+    {
+      "description": "type c adapter zara",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "bed frame shopping malam semalam",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "beli bow tie at bangsar village",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 6
+    },
+    {
+      "description": "buy racun lipas from shopee home",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 6
+    },
+    {
+      "description": "sports shoes for shah",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "buy sleeping bag for liew",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "shopping bracelet with yusof",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "buy pubg uc for selvi",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "iron for saiful",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "buy samsung watch from klcc",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "batik shirt shopping",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "buy steam credit for wife",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "beli expedia late night",
+      "category": "wants",
+      "subcategory": "Transportation",
+      "length": 4
+    },
+    {
+      "description": "order palazzo pants for adik",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "gaming keyboard online",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "mesin basuh for firdaus",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "buy yoga mat for nadia",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "order running shoes for mala",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "bridal makeup jumaat",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "buy netball for vikram",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 4
+    },
+    {
+      "description": "shopping shirt",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 2
+    },
+    {
+      "description": "kerusi for nenek",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "buy riot points for kho",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "hair wash malam",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "celebrate pork chop with koh",
+      "category": "wants",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "beli earrings at ttdi plaza",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "malindo air for tee",
+      "category": "wants",
+      "subcategory": "Transportation",
+      "length": 4
+    },
+    {
+      "description": "eyelash extension with syukri",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "buy mangkuk from shopee home",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 5
+    },
+    {
+      "description": "buy fortnite vbucks for raju",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "body lotion untuk farah",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "celebrate sirloin steak with colleague",
+      "category": "wants",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "dining table for tan",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "kettle for bini",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "topup call of duty points jumaat",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 6
+    },
+    {
+      "description": "beli steam wallet",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 3
+    },
+    {
+      "description": "beli clock at mr diy mall",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 6
+    },
+    {
+      "description": "beli slacks at ikea",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "treat lamb chop at tealive",
+      "category": "wants",
+      "subcategory": "Food & Beverage",
+      "length": 5
+    },
+    {
+      "description": "doormat for raju",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "buy camping tent for hamdan",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 5
+    },
+    {
+      "description": "upgrade earphone",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 2
+    },
+    {
+      "description": "lampu for rahman",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "cargo pants for koh",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 4
+    },
+    {
+      "description": "aquaria klcc with hana",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 4
+    },
+    {
+      "description": "buy call of duty points for aiman",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 7
+    },
+    {
+      "description": "hard drive h&m",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    },
+    {
+      "description": "beli pencuci lantai at harvey norman",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 6
+    },
+    {
+      "description": "futsal with aminah",
+      "category": "wants",
+      "subcategory": "Entertainment",
+      "length": 3
+    },
+    {
+      "description": "broom for najwa",
+      "category": "wants",
+      "subcategory": "Shopping",
+      "length": 3
+    }
+  ]
+}
