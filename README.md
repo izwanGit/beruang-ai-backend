@@ -80,7 +80,7 @@ Understand the data distribution and vocabulary breadth before the model sees it
 </td>
 <td width="50%">
 <p align="center"><b>Sentence Length Stats</b><br/>
-<img src="visualizations/transaction/pre_training/histogram_text_length.png" width="100%"></p>
+<img src="visualizations/transaction/pre_training/histogram_sentence_length.png" width="100%"></p>
 </td>
 </tr>
 </table>
