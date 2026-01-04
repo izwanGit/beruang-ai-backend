@@ -28,8 +28,9 @@ graph TD
     B -->|NLP Voice| C[<b>Intent Classification</b><br/>MiniLM Embeddings]
     B -->|Financial Logic| D[<b>Transaction AI</b><br/>Bi-directional LSTM]
     C -->|Routes To| E[Grok LLM or Local Response]
-    D -->|Categorizes To| F[Needs vs Wants]
-    F --> G[Budget Analysis]
+    D -->|Dual-Output| F[<b>Category Branch</b><br/>Needs vs Wants]
+    D -->|Dual-Output| G[<b>Subcategory Branch</b><br/>7 Specific Classes]
+    F & G --> H[<b>Budget Analysis</b><br/>Contextual Insights]
 ```
 
 ---
@@ -126,8 +127,11 @@ Focuses on the Malaysian financial context and strict logic-error-proofing.
 </tr>
 </table>
 
-#### Post-Training Performance
-The definitive proof of our **V11 Model's** logic-proof capabilities.
+#### Post-Training Performance & Stability
+Evidence of the model's reliability and **zero-overfitting** architecture.
+
+> [!TIP]
+> **Overfitting Verification**: As seen in the training curves below, the Validation Loss (dashed line) tracks the Training Loss perfectly. This proves the model has generalized the 150k Malaysian samples and is not simply "memorizing" the training data.
 
 <table>
 <tr>
