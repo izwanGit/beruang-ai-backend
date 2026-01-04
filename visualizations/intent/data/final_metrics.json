@@ -1,0 +1,13 @@
+{
+  "accuracy": 0.9941449754979953,
+  "macroF1": 0.9933543111587492,
+  "totalSamples": 78564,
+  "trainingSamples": 62851,
+  "validationSamples": 15713,
+  "intentCount": 56,
+  "epochs": 25,
+  "finalTrainLoss": 0.014516730792820454,
+  "finalValLoss": 0.027810217812657356,
+  "finalTrainAcc": 0.9953858852386475,
+  "finalValAcc": 0.9941449761390686
+}

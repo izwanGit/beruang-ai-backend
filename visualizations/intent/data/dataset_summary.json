@@ -1,0 +1,23 @@
+{
+  "totalSamples": 78564,
+  "uniqueTexts": 31993,
+  "duplicateCount": 46571,
+  "duplicatePercentage": "59.28",
+  "intentCount": 56,
+  "textLengthStats": {
+    "average": "18.0",
+    "median": 16,
+    "min": 1,
+    "max": 62
+  },
+  "wordCountStats": {
+    "average": "3.3",
+    "median": 3
+  },
+  "categoryBreakdown": {
+    "GROK (Complex/Analysis)": 30000,
+    "Local (App Help)": 44688,
+    "Garbage": 3876
+  },
+  "generatedAt": "2026-01-04T08:15:54.178Z"
+}

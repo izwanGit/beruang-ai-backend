@@ -1,0 +1,282 @@
+[
+  {
+    "intent": "COMPLEX_ADVICE",
+    "count": 30000,
+    "percentage": "38.19"
+  },
+  {
+    "intent": "GARBAGE",
+    "count": 3876,
+    "percentage": "4.93"
+  },
+  {
+    "intent": "GREETING",
+    "count": 1672,
+    "percentage": "2.13"
+  },
+  {
+    "intent": "BYE",
+    "count": 1216,
+    "percentage": "1.55"
+  },
+  {
+    "intent": "HELP_SAVINGS_SCREEN",
+    "count": 1216,
+    "percentage": "1.55"
+  },
+  {
+    "intent": "ADVICE_MOTIVATION",
+    "count": 1216,
+    "percentage": "1.55"
+  },
+  {
+    "intent": "THANK_YOU",
+    "count": 1064,
+    "percentage": "1.35"
+  },
+  {
+    "intent": "DEVELOPER_INFO",
+    "count": 1064,
+    "percentage": "1.35"
+  },
+  {
+    "intent": "COMPLAINT",
+    "count": 1064,
+    "percentage": "1.35"
+  },
+  {
+    "intent": "ADVICE_GENERAL_TIP",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_REBALANCING",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_GAMIFICATION_LEVELS",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_RECEIPT_SCAN",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_GAMIFICATION_XP",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "JOKE",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_GAMIFICATION_PENALTY",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_RESET_DATA",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_ADD_TRANSACTION",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_INCOME_ALLOCATION",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "TESTING",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "BANK_LINKING",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_ADD_INCOME",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "WHY_BERUANG",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "HELP_INITIAL_BALANCE",
+    "count": 912,
+    "percentage": "1.16"
+  },
+  {
+    "intent": "INTERNET_REQ",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "TARGET_AUDIENCE",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "HELP_WITHDRAW_SAVINGS",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "CONTACT_SUPPORT",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "NAV_EXPENSES",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "WHO_ARE_YOU",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_CREDIT_SCORE",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "HELP_EDIT_TRANSACTION",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "HELP_AI_CATEGORIZATION",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "APP_PURPOSE",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DATA_SECURITY",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_WANTS",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_INFLATION",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_KWSP",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "HELP_DELETE_TRANSACTION",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "HELP_KNOWLEDGE_BASE",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "NAV_PROFILE",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_50_30_20",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "DEF_NEEDS",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "ADVICE_STUDENT_TIPS",
+    "count": 760,
+    "percentage": "0.97"
+  },
+  {
+    "intent": "NAV_HOME",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_ASB",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "ADVICE_GENERAL_SAVING",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "APP_VERSION",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_PTPTN",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "NAV_CHATBOT",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_SAVINGS_DEF",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_DEBT_SNOWBALL",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_DEBT_AVALANCHE",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_COMPOUND_INTEREST",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_EMERGENCY_FUND",
+    "count": 608,
+    "percentage": "0.77"
+  },
+  {
+    "intent": "DEF_TABUNG_HAJI",
+    "count": 608,
+    "percentage": "0.77"
+  }
+]

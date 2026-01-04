@@ -1,0 +1,394 @@
+{
+  "ADVICE_GENERAL_TIP": [
+    "saving tips",
+    "how to save money",
+    "Give me a tip",
+    "finacial advice",
+    "frugal tip"
+  ],
+  "GARBAGE": [
+    "rocd",
+    "<<<",
+    "[obejct Object]",
+    "qwerty",
+    "qwerty"
+  ],
+  "COMPLEX_ADVICE": [
+    "give me tips for asb",
+    "thoughts on salary negotiation given my income",
+    "can you explain random fact",
+    "weekly expenses",
+    "nothin greally"
+  ],
+  "HELP_REBALANCING": [
+    "carry over next monh",
+    "What happens at end of month",
+    "carry  over next month",
+    "Leftover money",
+    "What is rebalancing?"
+  ],
+  "INTERNET_REQ": [
+    "Need internet?",
+    "works offline?",
+    "Offline mode?",
+    "No wiif?",
+    "works offline?"
+  ],
+  "HELP_GAMIFICATION_LEVELS": [
+    "Level progress",
+    "hiw many levels",
+    "Max level",
+    "evolution stages",
+    "Bear stages"
+  ],
+  "THANK_YOU": [
+    "thanks bear",
+    "thx",
+    "Appreciate it",
+    "thnaks",
+    "Good job"
+  ],
+  "NAV_HOME": [
+    "main screen",
+    "Showhome",
+    "Go yo home",
+    "Main screen",
+    "go to home"
+  ],
+  "TARGET_AUDIENCE": [
+    "Target user",
+    "Who is this foe?",
+    "age group",
+    "Is tis for me?",
+    "Targett user"
+  ],
+  "HELP_WITHDRAW_SAVINGS": [
+    "emergency fund use",
+    "use savings",
+    "Emergency  fund use",
+    "use savings",
+    "take money out"
+  ],
+  "HELP_RECEIPT_SCAN": [
+    "Ocr",
+    "Occr",
+    "can i scam bills",
+    "Csn I scan bills",
+    "Camera frature"
+  ],
+  "CONTACT_SUPPORT": [
+    "Customer service",
+    "help desk",
+    "customer serviice",
+    "customer service",
+    "Email developer"
+  ],
+  "HELP_GAMIFICATION_XP": [
+    "How ot grow bear",
+    "xp tale",
+    "xpr ewards",
+    "Level up guide",
+    "xp rewards"
+  ],
+  "JOKE": [
+    "Tell me a joke",
+    "Tell me s joke",
+    "Say something funny",
+    "monet joke",
+    "Tell me a joke"
+  ],
+  "NAV_EXPENSES": [
+    "Teansaction list",
+    "Go to transaction log",
+    "Transaction ist",
+    "My spending",
+    "show expenes"
+  ],
+  "BYE": [
+    "Exit",
+    "Lateer",
+    "End chat",
+    "Goodybe",
+    "Bye"
+  ],
+  "WHO_ARE_YOU": [
+    "who created  you?",
+    "Who created you?",
+    "Tell me about yourself",
+    "What is your namee?",
+    "are you ai?"
+  ],
+  "HELP_GAMIFICATION_PENALTY": [
+    "Overspending hit",
+    "Lose XP",
+    "Why XP dropped",
+    "overspending hit",
+    "whyx p dropped"
+  ],
+  "GREETING": [
+    "Start",
+    "Hey",
+    "Are you there?",
+    "Greettings",
+    "hey bear"
+  ],
+  "HELP_RESET_DATA": [
+    "Retake onboarding",
+    "Start over",
+    "Reseet data",
+    "reset profile",
+    "Delete account"
+  ],
+  "HELP_SAVINGS_SCREEN": [
+    "20 percent misssion",
+    "How saving works",
+    "How to save?",
+    "Saving bar",
+    "How to save?"
+  ],
+  "DEF_ASB": [
+    "what is asb?",
+    "what is asb?",
+    "Is ASB good?",
+    "what is asb?",
+    "asb invesitng"
+  ],
+  "ADVICE_MOTIVATION": [
+    "I have no money",
+    "Help mee save",
+    "Give me motivation",
+    "i have no money",
+    "give me motivation"
+  ],
+  "HELP_ADD_TRANSACTION": [
+    "record spending",
+    "I spent momey",
+    "record spending",
+    "Add transaction",
+    "Where to add cost"
+  ],
+  "DEVELOPER_INFO": [
+    "Universsity",
+    "university",
+    "developer name",
+    "Univerity",
+    "who made this?"
+  ],
+  "ADVICE_GENERAL_SAVING": [
+    "high interest savings",
+    "Where toput savings",
+    "High interest savings",
+    "High interest savings",
+    "High interest savings"
+  ],
+  "DEF_CREDIT_SCORE": [
+    "ccris",
+    "Credit rating",
+    "ctos",
+    "credit rating",
+    "wh ycredit score matters"
+  ],
+  "HELP_EDIT_TRANSACTION": [
+    "fix mistake",
+    "Wrong amount",
+    "change expense",
+    "Change expense",
+    "Fix mistake"
+  ],
+  "APP_VERSION": [
+    "What versiom is this?",
+    "app versoon",
+    "Is this udated?",
+    "is this updated?",
+    "What version is this?"
+  ],
+  "HELP_AI_CATEGORIZATION": [
+    "Auto cateegory",
+    "How does categorization work?",
+    "Auto category",
+    "ai category",
+    "how does categorization wokr?"
+  ],
+  "DEF_PTPTN": [
+    "Education loan",
+    "stdent loan",
+    "ptptn  debt",
+    "education loan",
+    "education loan"
+  ],
+  "NAV_CHATBOT": [
+    "where is chat?",
+    "Ask ai",
+    "where is chat?",
+    "Go tto bot",
+    "open chat"
+  ],
+  "HELP_INCOME_ALLOCATION": [
+    "split inome?",
+    "Spliti ncome?",
+    "Lump sum",
+    "Lump sum",
+    "How allocation works"
+  ],
+  "TESTING": [
+    "hello 1123",
+    "Test",
+    "is this working",
+    "Testing",
+    "testing"
+  ],
+  "BANK_LINKING": [
+    "Ca I connect bank?",
+    "Auto teack?",
+    "Cimb link?",
+    "Can I connect bank?",
+    "Sync account?"
+  ],
+  "APP_PURPOSE": [
+    "function of app",
+    "App featrues",
+    "what does this app do?",
+    "Why use this?",
+    "Function of app"
+  ],
+  "DEF_SAVINGS_DEF": [
+    "Why save?",
+    "define savings",
+    "Savings definition",
+    "Savings defintion",
+    "Savings definition"
+  ],
+  "DEF_DEBT_SNOWBALL": [
+    "how to pay debt fast",
+    "snowball method",
+    "debt snowball",
+    "Snowball  vs avalanche",
+    "Debt snowball"
+  ],
+  "DATA_SECURITY": [
+    "Do you steal my data?",
+    "where is data stored?",
+    "peivacy policy",
+    "Do you steal my data?",
+    "Secuee?"
+  ],
+  "HELP_ADD_INCOME": [
+    "Enter earnings",
+    "Got paid",
+    "deposit money",
+    "Where to put salary",
+    "addd income"
+  ],
+  "DEF_WANTS": [
+    "coffee need or want?",
+    "what are wants?",
+    "what are wwants?",
+    "coffee need or want?",
+    "Define Wants"
+  ],
+  "DEF_INFLATION": [
+    "Meaning of inflation",
+    "Whyy things expensive?",
+    "Define inflatin",
+    "why things expensive?",
+    "explain inflation concept"
+  ],
+  "COMPLAINT": [
+    "stupid",
+    "Stupid",
+    "Woorst app",
+    "Wrongg answer",
+    "Wrong answer"
+  ],
+  "DEF_KWSP": [
+    "epf account",
+    "Employees porvident fund",
+    "retirement fund",
+    "employees provident fund",
+    "epf"
+  ],
+  "HELP_DELETE_TRANSACTION": [
+    "csncel spending",
+    "delete transaction",
+    "Mistake entry",
+    "Cancel spending",
+    "Clear entry"
+  ],
+  "DEF_DEBT_AVALANCHE": [
+    "Debt avalanche",
+    "Debtavalanche",
+    "save interest debt",
+    "Debt aalanche",
+    "Avalanche method"
+  ],
+  "HELP_KNOWLEDGE_BASE": [
+    "saved widgets",
+    "Where is my advice",
+    "View saved chat",
+    "Where is my advice",
+    "savde advice"
+  ],
+  "NAV_PROFILE": [
+    "My account",
+    "uesr info",
+    "G to profile",
+    "Sttings",
+    "My account"
+  ],
+  "DEF_COMPOUND_INTEREST": [
+    "Magic of compounding",
+    "Inyerest on interest",
+    "Compounding",
+    "interest on interest",
+    "Magic of compounding"
+  ],
+  "DEF_EMERGENCY_FUND": [
+    "Why need emergency fund?",
+    "How much emergency fund?",
+    "Emergency savings",
+    "How much emergency fund?",
+    "What is emergency fund?"
+  ],
+  "DEF_50_30_20": [
+    "explain rule",
+    "expllain rule",
+    "Budget method",
+    "What is 50/30/20?",
+    "percentages"
+  ],
+  "DEF_NEEDS": [
+    "what are needs?",
+    "Essenntial expenses",
+    "what are needs?",
+    "Essential exxpenses",
+    "what are needs?"
+  ],
+  "DEF_TABUNG_HAJI": [
+    "What is Tabung Haji?",
+    "TH",
+    "th savings",
+    "simpaman tabung haji",
+    "th savinggs"
+  ],
+  "ADVICE_STUDENT_TIPS": [
+    "Studen tbudget tips",
+    "No money student",
+    "how tto save as a student?",
+    "No money studet",
+    "Student budget tips"
+  ],
+  "WHY_BERUANG": [
+    "meaning of name",
+    "Meaing of name",
+    "Why Beruang?",
+    "meaning of name",
+    "Name origin"
+  ],
+  "HELP_INITIAL_BALANCE": [
+    "Wallet stsrt",
+    "First timesetup",
+    "Enter starting money",
+    "enter starting money",
+    "Initial balance"
+  ]
+}
