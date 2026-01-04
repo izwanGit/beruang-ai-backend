@@ -24,14 +24,38 @@ Beruang AI Backend is the data-science core of the [Beruang App](https://github.
 
 ```mermaid
 graph TD
-    A[<b>User Input</b>] --> B{<b>AI Dispatcher</b>}
-    B -->|NLP Voice| C[<b>Intent Classification</b><br/>MiniLM Embeddings]
-    B -->|Financial Logic| D[<b>Transaction AI</b><br/>Bi-directional LSTM]
-    C -->|Routes To| E[Grok LLM or Local Response]
-    D -->|Dual-Output| F[<b>Category Branch</b><br/>Needs vs Wants]
-    D -->|Dual-Output| G[<b>Subcategory Branch</b><br/>7 Specific Classes]
-    F & G --> H[<b>Budget Analysis</b><br/>Contextual Insights]
+    subgraph "NLU Pipeline (NLP)"
+    A1[User Query] --> B1[MiniLM Embeddings]
+    B1 --> C1{Intent Model}
+    C1 -->|99.41%| D1[56 Intent Routes]
+    end
+
+    subgraph "Financial Engine (BiLSTM)"
+    A2[Transaction Text] --> B2[Bi-Directional LSTM]
+    B2 --> C2{Dual-Output}
+    C2 -->|Needs/Wants| D2[Category]
+    C2 -->|7 Classes| E2[Subcategory]
+    end
+
+    D1 --> F[<b>Beruang Orchestrator</b>]
+    D2 & E2 --> F
 ```
+
+---
+
+## ✨ Features
+
+### 💎 The 150k "Gold Standard" Dataset
+- **Logic-Proof Generation**: Ultra-strict template-based pairing (e.g., "Starbucks" is always Wants, "Toll" is always Needs).
+- **Zero Nonsense**: Eliminates random word mixing (no more "minum garam" or "shopping roadtax").
+- **Malaysian Identity**: 600+ local vocabulary items including Zakat, Touch n Go, Grab, and regional dialects.
+- **Zero Overfitting**: Verified through validation/training loss parity; the model generalizes exceptionally well to unseen local merchant names.
+- **Set-Based Uniqueness**: Each of the 150,381 rows is unique and semantically valid.
+
+### 🧠 Dual-Output Architecture
+- **Bi-directional LSTM**: Processes transaction descriptions forwards and backwards for deep contextual understanding.
+- **Simultaneous Classification**: One model predicts both `category` (Needs/Wants) and `subcategory` (7 classes) in a single pass.
+- **Bias Mitigation**: Active oversampling during training ensures the "Wants" minority class is handled as accurately as "Needs."
 
 ---
 
@@ -39,11 +63,14 @@ graph TD
 
 The "Voice" of Beruang. This model uses **all-MiniLM-L6-v2** embeddings to map user queries to **56 distinct intents** with 99.41% accuracy.
 
-### 📊 Intent Visualization Gallery
+---
+
+## 📊 Visualization Gallery
+
+### 🏗️ Intent Classification Gallery
 
 #### Pre-Training Analysis (Dataset: 80k+ Rows)
 Examines the semantic balance and linguistic variety of the training data.
-
 <table>
 <tr>
 <td width="50%">
