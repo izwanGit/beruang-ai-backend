@@ -1,17 +1,17 @@
 [
   {
     "category": "GROK (Complex/Analysis)",
-    "count": 30000,
-    "percentage": "38.19"
+    "count": 32109,
+    "percentage": "36.92"
   },
   {
     "category": "Local (App Help)",
-    "count": 44688,
-    "percentage": "56.88"
+    "count": 50982,
+    "percentage": "58.62"
   },
   {
     "category": "Garbage",
-    "count": 3876,
-    "percentage": "4.93"
+    "count": 3879,
+    "percentage": "4.46"
   }
 ]

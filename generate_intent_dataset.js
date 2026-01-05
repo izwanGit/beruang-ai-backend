@@ -26,6 +26,41 @@ const COMPLEX_LABEL = "COMPLEX_ADVICE";
 const GARBAGE_LABEL = "GARBAGE";
 
 // ============================================================================
+// 0. EXPLICIT TYPO MAPPINGS (High-confidence typos for common intents)
+// ============================================================================
+
+const EXPLICIT_TYPOS = {
+    GREETING: [
+        "helli", "helllo", "heloo", "helo", "hii", "hai", "hiii", "hellooo",
+        "heyy", "heey", "heyyo", "heya", "hllo", "helo", "hellp", "helol",
+        "holla", "ello", "elo", "hyy", "hoi", "helo there", "helloo",
+        "gud morning", "gd morning", "mornin", "morningg"
+    ],
+    BYE: [
+        "byee", "bey", "byeee", "goodby", "gudbye", "gdbye", "laterr",
+        "ltr", "laterz", "bb", "seeyou", "see ya", "c ya", "gn", "gdnight"
+    ],
+    THANK_YOU: [
+        "thnx", "thnks", "thankss", "ty", "tyvm", "tanks", "thanku",
+        "tq", "tkss", "thank u", "thx bear", "tysm"
+    ],
+    HELP_SAVINGS_SCREEN: [
+        "savigns", "savins", "savinsg", "svings", "savng", "how savigns",
+        "savingss", "go to svings", "savings scrn"
+    ],
+    HELP_ADD_TRANSACTION: [
+        "transction", "transation", "trnsaction", "transacton",
+        "add transction", "add transation", "new transction"
+    ]
+};
+
+// SINGLE-WORD AMBIGUOUS PATTERNS → These need clarification, route to GROK
+const AMBIGUOUS_SINGLE_WORDS = [
+    "money", "help", "budget", "save", "spend", "tips", "advice",
+    "finance", "bank", "loan", "debt", "income", "salary", "invest"
+];
+
+// ============================================================================
 // 1. GROK QUERY PATTERNS (These MUST go to Grok for analysis)
 // ============================================================================
 
@@ -414,13 +449,56 @@ function generateGarbage() {
     return rows;
 }
 
+// 7. Generate Explicit Typo Data (High-confidence typos)
+function generateExplicitTypos() {
+    const rows = [];
+    console.log(`\n🔹 Generating Explicit Typo Data (helli→GREETING, etc)...`);
+
+    for (const [intent, typos] of Object.entries(EXPLICIT_TYPOS)) {
+        console.log(`   ➜ Adding ${typos.length} explicit typos for ${intent}...`);
+
+        for (const typo of typos) {
+            // Add base typo and case variants
+            rows.push(`"${typo}",${intent}`);
+            rows.push(`"${typo.toLowerCase()}",${intent}`);
+            rows.push(`"${typo.charAt(0).toUpperCase() + typo.slice(1).toLowerCase()}",${intent}`);
+
+            // Add some augmented variants
+            for (let i = 0; i < 50; i++) {
+                rows.push(`"${generateWithCase(typo)}",${intent}`);
+            }
+        }
+    }
+
+    return rows;
+}
+
+// 8. Generate Ambiguous Single-Word Data → GROK
+function generateAmbiguousSingleWords() {
+    const rows = [];
+    console.log(`\n🔹 Generating Ambiguous Single-Word Data (money→GROK)...`);
+
+    for (const word of AMBIGUOUS_SINGLE_WORDS) {
+        // Single words that need context should go to GROK for clarification
+        for (let i = 0; i < 100; i++) {
+            rows.push(`"${generateWithCase(word)}",${COMPLEX_LABEL}`);
+            // Also with ? alone
+            if (Math.random() > 0.5) {
+                rows.push(`"${generateWithCase(word)}?",${COMPLEX_LABEL}`);
+            }
+        }
+    }
+
+    return rows;
+}
+
 // ============================================================================
 // 6. MAIN EXECUTION
 // ============================================================================
 
 function main() {
     console.log("=========================================================");
-    console.log("   🐻 BERUANG SUPER-GENERATOR V7 - LOGIC-ERROR-PROOF 🐻");
+    console.log("   🐻 BERUANG SUPER-GENERATOR V8 - TYPO-PROOF EDITION 🐻");
     console.log("=========================================================");
     console.log("");
     console.log("Key Improvements:");
@@ -430,6 +508,8 @@ function main() {
     console.log("  ✅ Uncertain inputs → GROK (idk, not sure)");
     console.log("  ✅ NAV_* uses action verbs only");
     console.log("  ✅ GARBAGE has no conflicting patterns");
+    console.log("  ✅ NEW: Explicit typo mappings (helli→GREETING)");
+    console.log("  ✅ NEW: Ambiguous single words → GROK");
     console.log("");
 
     const grokQueryRows = generateGrokQueryData();
@@ -438,6 +518,8 @@ function main() {
     const uncertainRows = generateUncertainData();
     const localRows = generateLocalData();
     const garbageRows = generateGarbage();
+    const explicitTypoRows = generateExplicitTypos();
+    const ambiguousRows = generateAmbiguousSingleWords();
 
     const allRows = [
         ...grokQueryRows,
@@ -445,7 +527,9 @@ function main() {
         ...complexRows,
         ...uncertainRows,
         ...localRows,
-        ...garbageRows
+        ...garbageRows,
+        ...explicitTypoRows,
+        ...ambiguousRows
     ];
 
     // Shuffle
@@ -473,6 +557,8 @@ function main() {
     console.log(`  • Uncertain Inputs: ${uncertainRows.length.toLocaleString()}`);
     console.log(`  • Local Intents: ${localRows.length.toLocaleString()}`);
     console.log(`  • Garbage: ${garbageRows.length.toLocaleString()}`);
+    console.log(`  • Explicit Typos: ${explicitTypoRows.length.toLocaleString()}`);
+    console.log(`  • Ambiguous Words: ${ambiguousRows.length.toLocaleString()}`);
     console.log(`=========================================================`);
 }
 

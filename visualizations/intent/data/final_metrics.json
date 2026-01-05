@@ -1,13 +1,13 @@
 {
-  "accuracy": 0.9941449754979953,
-  "macroF1": 0.9933543111587492,
-  "totalSamples": 78564,
-  "trainingSamples": 62851,
-  "validationSamples": 15713,
+  "accuracy": 0.9956881683339083,
+  "macroF1": 0.9950727710589311,
+  "totalSamples": 86970,
+  "trainingSamples": 69576,
+  "validationSamples": 17394,
   "intentCount": 56,
   "epochs": 25,
-  "finalTrainLoss": 0.014516730792820454,
-  "finalValLoss": 0.027810217812657356,
-  "finalTrainAcc": 0.9953858852386475,
-  "finalValAcc": 0.9941449761390686
+  "finalTrainLoss": 0.0159034114331007,
+  "finalValLoss": 0.01949193701148033,
+  "finalTrainAcc": 0.9947970509529114,
+  "finalValAcc": 0.9956881403923035
 }

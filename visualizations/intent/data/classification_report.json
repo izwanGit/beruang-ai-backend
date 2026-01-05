@@ -4,396 +4,396 @@
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 127
+    "samples": 134
   },
   {
     "intent": "ADVICE_GENERAL_TIP",
-    "precision": 0.9939759036144579,
-    "recall": 0.9939759036144579,
-    "f1Score": 0.9939759036144579,
-    "samples": 166
+    "precision": 1,
+    "recall": 0.9942857142857143,
+    "f1Score": 0.9971346704871061,
+    "samples": 175
   },
   {
     "intent": "ADVICE_MOTIVATION",
-    "precision": 0.986046511627907,
-    "recall": 0.9769585253456221,
-    "f1Score": 0.9814814814814816,
-    "samples": 217
+    "precision": 1,
+    "recall": 0.9959183673469387,
+    "f1Score": 0.9979550102249488,
+    "samples": 245
   },
   {
     "intent": "ADVICE_STUDENT_TIPS",
-    "precision": 0.9828571428571429,
-    "recall": 1,
-    "f1Score": 0.9913544668587896,
-    "samples": 172
+    "precision": 1,
+    "recall": 0.993006993006993,
+    "f1Score": 0.9964912280701755,
+    "samples": 143
   },
   {
     "intent": "APP_PURPOSE",
-    "precision": 1,
+    "precision": 0.993421052631579,
     "recall": 1,
-    "f1Score": 1,
-    "samples": 166
+    "f1Score": 0.9966996699669968,
+    "samples": 151
   },
   {
     "intent": "APP_VERSION",
     "precision": 1,
-    "recall": 0.9823008849557522,
-    "f1Score": 0.9910714285714286,
-    "samples": 113
+    "recall": 1,
+    "f1Score": 1,
+    "samples": 125
   },
   {
     "intent": "BANK_LINKING",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 186
+    "samples": 154
   },
   {
     "intent": "BYE",
-    "precision": 0.9914163090128756,
-    "recall": 1,
-    "f1Score": 0.9956896551724138,
-    "samples": 231
+    "precision": 0.9966329966329966,
+    "recall": 0.9966329966329966,
+    "f1Score": 0.9966329966329966,
+    "samples": 594
   },
   {
     "intent": "COMPLAINT",
-    "precision": 0.9671361502347418,
-    "recall": 0.9951690821256038,
-    "f1Score": 0.9809523809523809,
-    "samples": 207
+    "precision": 1,
+    "recall": 0.9874476987447699,
+    "f1Score": 0.9936842105263157,
+    "samples": 239
   },
   {
     "intent": "COMPLEX_ADVICE",
-    "precision": 0.9973544973544973,
-    "recall": 0.9957081545064378,
-    "f1Score": 0.9965306459606806,
-    "samples": 6058
+    "precision": 0.9957620467744467,
+    "recall": 0.9979550102249489,
+    "f1Score": 0.9968573224387178,
+    "samples": 6357
   },
   {
     "intent": "CONTACT_SUPPORT",
-    "precision": 0.9935897435897436,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9967845659163987,
-    "samples": 155
+    "f1Score": 1,
+    "samples": 159
   },
   {
     "intent": "DATA_SECURITY",
-    "precision": 0.9746835443037974,
-    "recall": 0.9935483870967742,
-    "f1Score": 0.9840255591054313,
-    "samples": 155
+    "precision": 0.9932885906040269,
+    "recall": 1,
+    "f1Score": 0.9966329966329966,
+    "samples": 148
   },
   {
     "intent": "DEF_50_30_20",
-    "precision": 0.9856115107913669,
-    "recall": 0.9856115107913669,
-    "f1Score": 0.9856115107913669,
-    "samples": 139
+    "precision": 0.9929078014184397,
+    "recall": 0.9929078014184397,
+    "f1Score": 0.9929078014184397,
+    "samples": 141
   },
   {
     "intent": "DEF_ASB",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 116
+    "samples": 142
   },
   {
     "intent": "DEF_COMPOUND_INTEREST",
-    "precision": 0.9927536231884058,
+    "precision": 0.975,
     "recall": 1,
-    "f1Score": 0.9963636363636363,
-    "samples": 137
+    "f1Score": 0.9873417721518987,
+    "samples": 117
   },
   {
     "intent": "DEF_CREDIT_SCORE",
-    "precision": 0.9871794871794872,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9935483870967742,
+    "f1Score": 1,
     "samples": 154
   },
   {
     "intent": "DEF_DEBT_AVALANCHE",
-    "precision": 0.9918032786885246,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9958847736625513,
-    "samples": 121
+    "f1Score": 1,
+    "samples": 113
   },
   {
     "intent": "DEF_DEBT_SNOWBALL",
-    "precision": 0.9905660377358491,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9952606635071091,
-    "samples": 105
+    "f1Score": 1,
+    "samples": 115
   },
   {
     "intent": "DEF_EMERGENCY_FUND",
-    "precision": 0.9920634920634921,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9960159362549801,
-    "samples": 125
+    "f1Score": 1,
+    "samples": 134
   },
   {
     "intent": "DEF_INFLATION",
-    "precision": 0.9927536231884058,
+    "precision": 0.9862068965517241,
     "recall": 1,
-    "f1Score": 0.9963636363636363,
-    "samples": 137
+    "f1Score": 0.9930555555555556,
+    "samples": 143
   },
   {
     "intent": "DEF_KWSP",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 168
+    "samples": 153
   },
   {
     "intent": "DEF_NEEDS",
-    "precision": 0.9849624060150376,
+    "precision": 1,
     "recall": 1,
-    "f1Score": 0.9924242424242424,
-    "samples": 131
+    "f1Score": 1,
+    "samples": 179
   },
   {
     "intent": "DEF_PTPTN",
-    "precision": 1,
-    "recall": 0.9911504424778761,
-    "f1Score": 0.9955555555555555,
-    "samples": 113
+    "precision": 0.9918032786885246,
+    "recall": 1,
+    "f1Score": 0.9958847736625513,
+    "samples": 121
   },
   {
     "intent": "DEF_SAVINGS_DEF",
-    "precision": 1,
-    "recall": 0.9925373134328358,
-    "f1Score": 0.9962546816479401,
-    "samples": 134
+    "precision": 0.9921259842519685,
+    "recall": 0.9921259842519685,
+    "f1Score": 0.9921259842519685,
+    "samples": 127
   },
   {
     "intent": "DEF_TABUNG_HAJI",
     "precision": 1,
-    "recall": 0.9913793103448276,
-    "f1Score": 0.9956709956709957,
-    "samples": 116
+    "recall": 1,
+    "f1Score": 1,
+    "samples": 127
   },
   {
     "intent": "DEF_WANTS",
     "precision": 1,
-    "recall": 0.9937106918238994,
-    "f1Score": 0.9968454258675079,
-    "samples": 159
+    "recall": 1,
+    "f1Score": 1,
+    "samples": 137
   },
   {
     "intent": "DEVELOPER_INFO",
-    "precision": 0.9901960784313726,
-    "recall": 0.9950738916256158,
-    "f1Score": 0.9926289926289927,
-    "samples": 203
+    "precision": 0.9861111111111112,
+    "recall": 0.9906976744186047,
+    "f1Score": 0.9883990719257542,
+    "samples": 215
   },
   {
     "intent": "GARBAGE",
-    "precision": 0.9934296977660972,
-    "recall": 0.9780077619663649,
-    "f1Score": 0.9856584093872228,
-    "samples": 773
+    "precision": 0.9922779922779923,
+    "recall": 0.9871959026888605,
+    "f1Score": 0.9897304236200257,
+    "samples": 781
   },
   {
     "intent": "GREETING",
-    "precision": 0.9938650306748467,
-    "recall": 0.9878048780487805,
-    "f1Score": 0.9908256880733946,
-    "samples": 328
+    "precision": 0.9989743589743589,
+    "recall": 0.9989743589743589,
+    "f1Score": 0.9989743589743589,
+    "samples": 975
   },
   {
     "intent": "HELP_ADD_INCOME",
-    "precision": 0.9943820224719101,
-    "recall": 1,
-    "f1Score": 0.9971830985915493,
-    "samples": 177
+    "precision": 1,
+    "recall": 0.9944444444444445,
+    "f1Score": 0.9972144846796658,
+    "samples": 180
   },
   {
     "intent": "HELP_ADD_TRANSACTION",
-    "precision": 0.9946808510638298,
-    "recall": 0.9946808510638298,
-    "f1Score": 0.9946808510638298,
-    "samples": 188
+    "precision": 0.9960474308300395,
+    "recall": 0.984375,
+    "f1Score": 0.9901768172888016,
+    "samples": 256
   },
   {
     "intent": "HELP_AI_CATEGORIZATION",
     "precision": 1,
-    "recall": 1,
-    "f1Score": 1,
-    "samples": 163
+    "recall": 0.9928057553956835,
+    "f1Score": 0.996389891696751,
+    "samples": 139
   },
   {
     "intent": "HELP_DELETE_TRANSACTION",
-    "precision": 0.9875776397515528,
-    "recall": 0.9814814814814815,
-    "f1Score": 0.9845201238390092,
-    "samples": 162
+    "precision": 0.9932432432432432,
+    "recall": 0.98,
+    "f1Score": 0.9865771812080537,
+    "samples": 150
   },
   {
     "intent": "HELP_EDIT_TRANSACTION",
-    "precision": 0.9769230769230769,
-    "recall": 0.9921875,
-    "f1Score": 0.9844961240310077,
-    "samples": 128
+    "precision": 0.9695121951219512,
+    "recall": 0.9814814814814815,
+    "f1Score": 0.9754601226993865,
+    "samples": 162
   },
   {
     "intent": "HELP_GAMIFICATION_LEVELS",
-    "precision": 0.9945054945054945,
-    "recall": 1,
-    "f1Score": 0.9972451790633609,
-    "samples": 181
+    "precision": 0.9947089947089947,
+    "recall": 0.9947089947089947,
+    "f1Score": 0.9947089947089947,
+    "samples": 189
   },
   {
     "intent": "HELP_GAMIFICATION_PENALTY",
     "precision": 1,
-    "recall": 0.9890710382513661,
-    "f1Score": 0.9945054945054945,
-    "samples": 183
+    "recall": 0.994413407821229,
+    "f1Score": 0.9971988795518207,
+    "samples": 179
   },
   {
     "intent": "HELP_GAMIFICATION_XP",
+    "precision": 0.9939759036144579,
+    "recall": 0.9705882352941176,
+    "f1Score": 0.9821428571428572,
+    "samples": 170
+  },
+  {
+    "intent": "HELP_INCOME_ALLOCATION",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
     "samples": 169
   },
   {
-    "intent": "HELP_INCOME_ALLOCATION",
-    "precision": 0.9903846153846154,
-    "recall": 1,
-    "f1Score": 0.9951690821256038,
-    "samples": 206
-  },
-  {
     "intent": "HELP_INITIAL_BALANCE",
     "precision": 1,
-    "recall": 0.9891891891891892,
-    "f1Score": 0.9945652173913043,
-    "samples": 185
+    "recall": 0.9945652173913043,
+    "f1Score": 0.9972752043596731,
+    "samples": 184
   },
   {
     "intent": "HELP_KNOWLEDGE_BASE",
-    "precision": 0.9859154929577465,
+    "precision": 0.9938271604938271,
     "recall": 1,
-    "f1Score": 0.9929078014184397,
-    "samples": 140
+    "f1Score": 0.9969040247678018,
+    "samples": 161
   },
   {
     "intent": "HELP_REBALANCING",
-    "precision": 0.9946524064171123,
-    "recall": 0.9946524064171123,
-    "f1Score": 0.9946524064171123,
-    "samples": 187
+    "precision": 0.9947368421052631,
+    "recall": 0.9792746113989638,
+    "f1Score": 0.9869451697127937,
+    "samples": 193
   },
   {
     "intent": "HELP_RECEIPT_SCAN",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 167
+    "samples": 183
   },
   {
     "intent": "HELP_RESET_DATA",
-    "precision": 0.9835164835164835,
-    "recall": 1,
-    "f1Score": 0.9916897506925207,
-    "samples": 179
+    "precision": 0.9940828402366864,
+    "recall": 0.9940828402366864,
+    "f1Score": 0.9940828402366864,
+    "samples": 169
   },
   {
     "intent": "HELP_SAVINGS_SCREEN",
-    "precision": 0.984251968503937,
-    "recall": 0.9920634920634921,
-    "f1Score": 0.9881422924901185,
-    "samples": 252
+    "precision": 0.9970059880239521,
+    "recall": 1,
+    "f1Score": 0.9985007496251874,
+    "samples": 333
   },
   {
     "intent": "HELP_WITHDRAW_SAVINGS",
-    "precision": 0.9928571428571429,
-    "recall": 0.9858156028368794,
-    "f1Score": 0.9893238434163701,
-    "samples": 141
-  },
-  {
-    "intent": "INTERNET_REQ",
-    "precision": 1,
-    "recall": 0.9933774834437086,
-    "f1Score": 0.9966777408637874,
-    "samples": 151
-  },
-  {
-    "intent": "JOKE",
     "precision": 1,
     "recall": 1,
     "f1Score": 1,
-    "samples": 201
+    "samples": 146
+  },
+  {
+    "intent": "INTERNET_REQ",
+    "precision": 0.9803921568627451,
+    "recall": 0.9803921568627451,
+    "f1Score": 0.9803921568627451,
+    "samples": 153
+  },
+  {
+    "intent": "JOKE",
+    "precision": 0.9943820224719101,
+    "recall": 0.9943820224719101,
+    "f1Score": 0.9943820224719101,
+    "samples": 178
   },
   {
     "intent": "NAV_CHATBOT",
     "precision": 1,
-    "recall": 0.9819819819819819,
-    "f1Score": 0.9909090909090909,
-    "samples": 111
+    "recall": 0.9915254237288136,
+    "f1Score": 0.9957446808510638,
+    "samples": 118
   },
   {
     "intent": "NAV_EXPENSES",
-    "precision": 0.9722222222222222,
-    "recall": 0.9859154929577465,
-    "f1Score": 0.979020979020979,
-    "samples": 142
+    "precision": 0.9874213836477987,
+    "recall": 0.9874213836477987,
+    "f1Score": 0.9874213836477987,
+    "samples": 159
   },
   {
     "intent": "NAV_HOME",
     "precision": 1,
-    "recall": 0.991304347826087,
-    "f1Score": 0.9956331877729258,
-    "samples": 115
+    "recall": 1,
+    "f1Score": 1,
+    "samples": 118
   },
   {
     "intent": "NAV_PROFILE",
-    "precision": 0.9817073170731707,
-    "recall": 0.9938271604938271,
-    "f1Score": 0.9877300613496932,
-    "samples": 162
+    "precision": 0.9940476190476191,
+    "recall": 0.9881656804733728,
+    "f1Score": 0.9910979228486648,
+    "samples": 169
   },
   {
     "intent": "TARGET_AUDIENCE",
-    "precision": 1,
-    "recall": 0.974025974025974,
-    "f1Score": 0.9868421052631579,
-    "samples": 154
+    "precision": 0.9861111111111112,
+    "recall": 1,
+    "f1Score": 0.993006993006993,
+    "samples": 142
   },
   {
     "intent": "TESTING",
-    "precision": 0.9952153110047847,
-    "recall": 0.9904761904761905,
-    "f1Score": 0.9928400954653939,
-    "samples": 210
+    "precision": 1,
+    "recall": 0.9948979591836735,
+    "f1Score": 0.9974424552429668,
+    "samples": 196
   },
   {
     "intent": "THANK_YOU",
-    "precision": 0.9815668202764977,
-    "recall": 0.9953271028037384,
-    "f1Score": 0.988399071925754,
-    "samples": 214
+    "precision": 0.9944598337950139,
+    "recall": 0.9972222222222222,
+    "f1Score": 0.9958391123439668,
+    "samples": 360
   },
   {
     "intent": "WHO_ARE_YOU",
-    "precision": 0.9932432432432432,
-    "recall": 1,
-    "f1Score": 0.9966101694915254,
-    "samples": 147
+    "precision": 0.9865771812080537,
+    "recall": 0.9932432432432432,
+    "f1Score": 0.9898989898989898,
+    "samples": 148
   },
   {
     "intent": "WHY_BERUANG",
-    "precision": 0.9946524064171123,
-    "recall": 1,
-    "f1Score": 0.9973190348525469,
-    "samples": 186
+    "precision": 1,
+    "recall": 0.9895833333333334,
+    "f1Score": 0.9947643979057591,
+    "samples": 192
   },
   {
     "intent": "MACRO_AVERAGE",
-    "f1Score": 0.9933543111587492,
-    "samples": 15713
+    "f1Score": 0.9950727710589311,
+    "samples": 17394
   }
 ]

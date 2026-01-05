@@ -1,23 +1,23 @@
 {
-  "totalSamples": 78564,
-  "uniqueTexts": 31993,
-  "duplicateCount": 46571,
-  "duplicatePercentage": "59.28",
+  "totalSamples": 86970,
+  "uniqueTexts": 32531,
+  "duplicateCount": 54439,
+  "duplicatePercentage": "62.60",
   "intentCount": 56,
   "textLengthStats": {
-    "average": "18.0",
-    "median": 16,
+    "average": "16.8",
+    "median": 15,
     "min": 1,
-    "max": 62
+    "max": 63
   },
   "wordCountStats": {
-    "average": "3.3",
+    "average": "3.1",
     "median": 3
   },
   "categoryBreakdown": {
-    "GROK (Complex/Analysis)": 30000,
-    "Local (App Help)": 44688,
-    "Garbage": 3876
+    "GROK (Complex/Analysis)": 32109,
+    "Local (App Help)": 50982,
+    "Garbage": 3879
   },
-  "generatedAt": "2026-01-04T08:15:54.178Z"
+  "generatedAt": "2026-01-05T13:12:28.174Z"
 }
