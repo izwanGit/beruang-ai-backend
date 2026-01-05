@@ -4,8 +4,8 @@
 
 ![Version](https://img.shields.io/badge/version-12.0-blue.svg)
 ![Transaction Accuracy](https://img.shields.io/badge/trans__accuracy-99.88%25-brightgreen.svg)
-![Intent Accuracy](https://img.shields.io/badge/intent__accuracy-99.41%25-brightgreen.svg)
-![Dataset](https://img.shields.io/badge/dataset-230k_combined_rows-orange.svg)
+![Intent Accuracy](https://img.shields.io/badge/intent__accuracy-99.57%25-brightgreen.svg)
+![Dataset](https://img.shields.io/badge/dataset-237k_combined_rows-orange.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 
 **🧠 The Intelligence Engine for the Beruang Finance Ecosystem**
@@ -27,7 +27,7 @@ graph TD
     subgraph "NLU Pipeline (NLP)"
     A1[User Query] --> B1[MiniLM Embeddings]
     B1 --> C1{Intent Model}
-    C1 -->|99.41%| D1[56 Intent Routes]
+    C1 -->|99.57%| D1[56 Intent Routes]
     end
 
     subgraph "Financial Engine (BiLSTM)"
@@ -50,7 +50,8 @@ graph TD
 - **Zero Nonsense**: Eliminates random word mixing (no more "minum garam" or "shopping roadtax").
 - **Malaysian Identity**: 600+ local vocabulary items including Zakat, Touch n Go, Grab, and regional dialects.
 - **Zero Overfitting**: Verified through validation/training loss parity; the model generalizes exceptionally well to unseen local merchant names.
-- **Set-Based Uniqueness**: Each of the 150,381 rows is unique and semantically valid.
+- **Set-Based Uniqueness**: Each of the 150,381 transaction rows and 86,970 intent rows is unique and semantically valid.
+- **Explicit Typo Mapping**: Intent dataset includes intentional typo variations for high-frequency commands to ensure zero-misclassification for common mistakes.
 
 ### 🧠 Dual-Output Architecture
 - **Bi-directional LSTM**: Processes transaction descriptions forwards and backwards for deep contextual understanding.
@@ -61,7 +62,7 @@ graph TD
 
 ## 🏗️ 1. Intent Classification (NLP)
 
-The "Voice" of Beruang. This model uses **all-MiniLM-L6-v2** embeddings to map user queries to **56 distinct intents** with 99.41% accuracy.
+The "Voice" of Beruang. This model uses **all-MiniLM-L6-v2** embeddings to map user queries to **56 distinct intents** with 99.57% accuracy. It features a custom **Typo-Proof Engineering** layer that explicitly maps common variations (e.g., *helli* to *GREETING*).
 
 ---
 
