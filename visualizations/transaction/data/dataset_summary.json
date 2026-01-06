@@ -1,10 +1,10 @@
 {
-  "total_rows": 150381,
-  "unique_rows": 150381,
-  "needs_count": 96312,
-  "wants_count": 54069,
-  "needs_percentage": 64.04532487481796,
-  "wants_percentage": 35.95467512518204,
-  "avg_description_length": 4.253416322540747,
-  "vocab_size": 1963
+  "total_rows": 220152,
+  "unique_rows": 220152,
+  "needs_count": 120220,
+  "wants_count": 99932,
+  "needs_percentage": 54.60772557142338,
+  "wants_percentage": 45.39227442857662,
+  "avg_description_length": 3.959491623968894,
+  "vocab_size": 2142
 }

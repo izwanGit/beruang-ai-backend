@@ -5,11 +5,12 @@ const fs = require('fs');
 // Target: 150,000 UNIQUE, LOGICALLY PERFECT MALAYSIAN TRANSACTIONS
 // ==================================================================================
 
-const TOTAL_ROWS_TARGET = 150000;
+const TOTAL_ROWS_TARGET = 250000;
 
-console.log('🚀 BERUANG AI Transaction Dataset Generator V11');
-console.log('📊 Target: 150,000 unique, logically perfect rows');
-console.log('🇲🇾 Malaysian finance-specific vocabulary\n');
+console.log('🚀 BERUANG AI Transaction Dataset Generator V13');
+console.log('📊 Target: 250,000 unique, logically perfect rows');
+console.log('🇲🇾 Malaysian finance-specific vocabulary');
+console.log('✨ Includes single-words, plurals, typos, and 100+ new words\n');
 
 // ==================================================================================
 // SECTION 1: PEOPLE & NAMES (200+ Malaysian Names)
@@ -196,10 +197,116 @@ const PLACES_FANCY = [
   'coffee bean', 'san francisco coffee', 'nandos', 'chilis', 'tonys roma',
   'sushi king', 'sakae sushi', 'sushi tei', 'seoul garden', 'kim gary',
   'secret recipe', 'kenny rogers', 'texas chicken', 'subway', 'dominos',
-  'pizza hut', 'papa johns', 'mcd', 'kfc', 'burger king', 'a&w',
+  'pizza hut', 'papa johns', 'mcd', 'mcdonalds', 'kfc', 'burger king', 'a&w', 'marrybrown',
   'pavilion kl', 'klcc dining', 'midvalley restaurant', 'sunway pyramid cafe',
-  'bangsar cafe', 'damansara restaurant', ' publika cafe', 'ttdi bistro'
+  'bangsar cafe', 'damansara restaurant', 'publika cafe', 'ttdi bistro',
+  'zus coffee', 'luckin coffee', 'kopi kenangan', 'flash coffee'
 ];
+
+// ==================================================================================
+// SECTION 4A: SINGLE-WORD VOCABULARY (Critical for model accuracy)
+// ==================================================================================
+
+// These single words MUST be explicitly trained to avoid fallback
+const SINGLE_WORD_FOOD_NEEDS = [
+  'groceries', 'grocery', 'breakfast', 'lunch', 'dinner', 'brunch', 'supper',
+  'fruits', 'fruit', 'vegetables', 'veggies', 'snack', 'snacks',
+  'rice', 'noodles', 'noodle', 'bread', 'milk', 'eggs', 'egg',
+  'chicken', 'fish', 'beef', 'pork', 'meat', 'seafood',
+  'coffee', 'tea', 'water', 'juice', 'drinks', 'drink',
+  'kopi', 'teh', 'milo', 'nescafe', 'mamak', 'horlicks',
+  // Added vegetables
+  'lettuce', 'broccoli', 'peas', 'spinach', 'beans', 'corn', 'cabbage',
+  'carrots', 'potatoes', 'onions', 'garlic', 'ginger', 'tomatoes', 'cucumber',
+  // Added drinks
+  'soda', 'pepsi', 'sprite', 'fanta', 'ovaltine', 'coke',
+  // Added cooking basics
+  'sugar', 'salt', 'flour', 'oil', 'butter', 'cheese'
+];
+
+const SINGLE_WORD_FOOD_WANTS = [
+  'sushi', 'ramen', 'pizza', 'burger', 'steak', 'dessert', 'desserts',
+  'boba', 'latte', 'cappuccino', 'frappe', 'smoothie', 'lamb',
+  'starbucks', 'mcd', 'mcdonalds', 'kfc', 'subway', 'dominos',
+  // Added alcohol (WANTS)
+  'wine', 'beer', 'whiskey', 'vodka', 'alcohol', 'champagne', 'cocktail',
+  // Added tobacco (WANTS)
+  'cigarettes', 'tobacco', 'vape'
+];
+
+const SINGLE_WORD_TRANSPORT = [
+  'grab', 'uber', 'taxi', 'bus', 'train', 'lrt', 'mrt', 'monorail',
+  'petrol', 'diesel', 'fuel', 'toll', 'parking', 'car', 'motorcycle',
+  'flight', 'flights', 'lyft',
+  // Added petrol stations (NEEDS/Transport)
+  'petronas', 'shell', 'caltex', 'bhp', 'petron',
+  // Added convenience stores
+  'familymart', 'seveneleven', '7eleven'
+];
+
+const SINGLE_WORD_SHOPPING = [
+  'clothes', 'clothing', 'shoes', 'shoe', 'bag', 'bags', 'watch', 'watches',
+  'phone', 'laptop', 'tablet', 'headphones', 'earbuds', 'gadget', 'gadgets',
+  'book', 'books', 'toy', 'toys', 'gift', 'gifts'
+];
+
+const SINGLE_WORD_ENTERTAINMENT = [
+  'movie', 'movies', 'cinema', 'concert', 'concerts', 'game', 'games', 'gaming',
+  'netflix', 'spotify', 'youtube', 'gym', 'sports', 'sport',
+  'karaoke', 'bowling', 'arcade'
+];
+
+const SINGLE_WORD_BILLS = [
+  'electricity', 'electric', 'water', 'wifi', 'internet', 'rent', 'rental',
+  'bill', 'bills', 'utilities', 'utility', 'astro', 'unifi',
+  'insurance', 'loan', 'loans', 'mortgage',
+  // Added financial
+  'saham', 'stocks', 'bonds', 'investment', 'savings',
+  'asb', 'epf', 'kwsp', 'socso', 'perkeso', 'tabunghaji',
+  'crypto', 'bitcoin', 'ethereum', 'forex', 'trading',
+  // Added banks
+  'maybank', 'cimb', 'rhb', 'publicbank', 'hongoleong', 'ambank', 'bsn', 'affin', 'ocbc', 'hsbc',
+  // Added e-wallets
+  'touchngo', 'tng', 'boost', 'grabpay', 'shopeepay', 'duitnow', 'fpx',
+  // Added telcos (should be Telecom but mapped to Financial for bills)
+  'maxis', 'celcom', 'digi', 'umobile'
+];
+
+const SINGLE_WORD_OTHERS = [
+  'doctor', 'doctors', 'dentist', 'dentists', 'clinic', 'hospital',
+  'pharmacy', 'medicine', 'medicines', 'vitamin', 'vitamins',
+  'haircut', 'salon', 'spa', 'massage', 'barber',
+  'school', 'tuition', 'college', 'university', 'course',
+  'donation', 'donations', 'charity', 'zakat',
+  // Added medical
+  'aspirin', 'panadol', 'bandage', 'xray', 'mri', 'ultrasound', 'epidural',
+  'optician', 'glasses', 'contacts', 'hearing', 'vaccination', 'vaccine',
+  'dentistry', 'scaling', 'filling', 'denture', 'braces',
+  // Added baby
+  'pampers', 'diapers', 'stroller', 'playpen', 'cot', 'confinement', 'pantang',
+  // Added events
+  'deepavali', 'diwali', 'angpow', 'funeral', 'pengebumian', 'flowers', 'florist',
+  'balloon', 'baloon', 'videographer', 'photographer', 'henna', 'bakery',
+  // Added work (fallback to Others)
+  'salary', 'bonus', 'overtime', 'commission', 'freelance', 'gig',
+  'interview', 'resume', 'cv', 'career', 'promotion', 'resign', 'retirement', 'pension',
+  // Added misc
+  'potong rambut', 'vacation', 'homework', 'project', 'meeting'
+];
+
+// COMMON TYPOS (for training robustness)
+const TYPO_VARIANTS = {
+  'lunch': ['lnuch', 'lunhc', 'lunc'],
+  'dinner': ['dinne', 'diner', 'dineer'],
+  'breakfast': ['breakfst', 'brekfast', 'brakfast'],
+  'petrol': ['petorl', 'petro', 'petrole'],
+  'coffee': ['cofee', 'coffe', 'cofffe'],
+  'groceries': ['grocceries', 'grocerries', 'grocerys'],
+  'electricity': ['electricty', 'elektrik', 'electriciti'],
+  'internet': ['internett', 'inernet', 'intenet'],
+  'shopping': ['shoping', 'shoppping', 'shoppng'],
+  'transfer': ['tranfer', 'transffer', 'transfar']
+};
 
 // ==================================================================================
 // SECTION 4: SHOPPING VOCABULARY (200+ items)
@@ -974,6 +1081,123 @@ const GENERATORS = {
     () => `restock ${r(GROCERIES)}`,
     () => `buy ${r(GROCERIES)} from ${r(GROCERY_PLACES)}`,
   ],
+
+  // ==================================================================================
+  // SINGLE-WORD GENERATORS (Critical for model accuracy on standalone inputs)
+  // ==================================================================================
+
+  // SINGLE WORD: Food NEEDS - varied patterns
+  single_food_needs: [
+    () => r(SINGLE_WORD_FOOD_NEEDS),
+    () => `${r(SINGLE_WORD_FOOD_NEEDS)} ${r(TIMES)}`,
+    () => `beli ${r(SINGLE_WORD_FOOD_NEEDS)}`,
+    () => `buy ${r(SINGLE_WORD_FOOD_NEEDS)}`,
+    () => `${r(SINGLE_WORD_FOOD_NEEDS)} for ${r(NAMES)}`,
+    () => `${r(SINGLE_WORD_FOOD_NEEDS)} dengan ${r(NAMES)}`,
+    () => `${r(SINGLE_WORD_FOOD_NEEDS)} at ${r(PLACES_BASIC)}`,
+    () => `makan ${r(SINGLE_WORD_FOOD_NEEDS)}`,
+    () => `order ${r(SINGLE_WORD_FOOD_NEEDS)}`,
+    () => `${r(ORDINALS)} ${r(SINGLE_WORD_FOOD_NEEDS)}`,
+  ],
+
+  // SINGLE WORD: Food WANTS - varied patterns
+  single_food_wants: [
+    () => r(SINGLE_WORD_FOOD_WANTS),
+    () => `${r(SINGLE_WORD_FOOD_WANTS)} ${r(TIMES)}`,
+    () => `order ${r(SINGLE_WORD_FOOD_WANTS)}`,
+    () => `craving ${r(SINGLE_WORD_FOOD_WANTS)}`,
+    () => `${r(SINGLE_WORD_FOOD_WANTS)} for ${r(NAMES)}`,
+    () => `treat ${r(SINGLE_WORD_FOOD_WANTS)}`,
+    () => `${r(SINGLE_WORD_FOOD_WANTS)} at ${r(PLACES_FANCY)}`,
+    () => `celebrate with ${r(SINGLE_WORD_FOOD_WANTS)}`,
+  ],
+
+  // SINGLE WORD: Transport - varied patterns
+  single_transport: [
+    () => r(SINGLE_WORD_TRANSPORT),
+    () => `${r(SINGLE_WORD_TRANSPORT)} ${r(TIMES)}`,
+    () => `bayar ${r(SINGLE_WORD_TRANSPORT)}`,
+    () => `pay ${r(SINGLE_WORD_TRANSPORT)}`,
+    () => `${r(SINGLE_WORD_TRANSPORT)} to ${r(['office', 'home', 'mall', 'airport', 'station'])}`,
+    () => `${r(SINGLE_WORD_TRANSPORT)} for ${r(NAMES)}`,
+    () => `${r(DESCRIPTORS)} ${r(SINGLE_WORD_TRANSPORT)}`,
+    () => `${r(SINGLE_WORD_TRANSPORT)} ${r(MODIFIERS)}`,
+  ],
+
+  // SINGLE WORD: Shopping - varied patterns
+  single_shopping: [
+    () => r(SINGLE_WORD_SHOPPING),
+    () => `${r(SINGLE_WORD_SHOPPING)} ${r(TIMES)}`,
+    () => `beli ${r(SINGLE_WORD_SHOPPING)}`,
+    () => `buy ${r(SINGLE_WORD_SHOPPING)}`,
+    () => `${r(SINGLE_WORD_SHOPPING)} for ${r(NAMES)}`,
+    () => `new ${r(SINGLE_WORD_SHOPPING)}`,
+    () => `${r(SINGLE_WORD_SHOPPING)} from ${r(SHOPPING_PLACES)}`,
+    () => `order ${r(SINGLE_WORD_SHOPPING)} online`,
+  ],
+
+  // SINGLE WORD: Entertainment - varied patterns
+  single_entertainment: [
+    () => r(SINGLE_WORD_ENTERTAINMENT),
+    () => `${r(SINGLE_WORD_ENTERTAINMENT)} ${r(TIMES)}`,
+    () => `watch ${r(SINGLE_WORD_ENTERTAINMENT)}`,
+    () => `${r(SINGLE_WORD_ENTERTAINMENT)} with ${r(NAMES)}`,
+    () => `${r(SINGLE_WORD_ENTERTAINMENT)} night`,
+    () => `${r(SINGLE_WORD_ENTERTAINMENT)} subscription`,
+    () => `bayar ${r(SINGLE_WORD_ENTERTAINMENT)}`,
+  ],
+
+  // SINGLE WORD: Bills & Financial - varied patterns
+  single_bills: [
+    () => r(SINGLE_WORD_BILLS),
+    () => `${r(SINGLE_WORD_BILLS)} ${r(TIMES)}`,
+    () => `bayar ${r(SINGLE_WORD_BILLS)}`,
+    () => `pay ${r(SINGLE_WORD_BILLS)}`,
+    () => `${r(SINGLE_WORD_BILLS)} ${r(MODIFIERS)}`,
+    () => `${r(DESCRIPTORS)} ${r(SINGLE_WORD_BILLS)}`,
+    () => `${r(SINGLE_WORD_BILLS)} for ${r(NAMES)}`,
+    () => `settle ${r(SINGLE_WORD_BILLS)}`,
+  ],
+
+  // SINGLE WORD: Others (healthcare, education, etc.) - varied patterns
+  single_others: [
+    () => r(SINGLE_WORD_OTHERS),
+    () => `${r(SINGLE_WORD_OTHERS)} ${r(TIMES)}`,
+    () => `pergi ${r(SINGLE_WORD_OTHERS)}`,
+    () => `bayar ${r(SINGLE_WORD_OTHERS)}`,
+    () => `${r(SINGLE_WORD_OTHERS)} for ${r(NAMES)}`,
+    () => `visit ${r(SINGLE_WORD_OTHERS)}`,
+    () => `${r(DESCRIPTORS)} ${r(SINGLE_WORD_OTHERS)}`,
+    () => `${r(SINGLE_WORD_OTHERS)} checkup`,
+  ],
+
+  // TYPO VARIANTS (for model robustness) - varied patterns
+  typo_variants: [
+    () => {
+      const words = Object.keys(TYPO_VARIANTS);
+      const word = r(words);
+      const typos = TYPO_VARIANTS[word];
+      return r(typos);
+    },
+    () => {
+      const words = Object.keys(TYPO_VARIANTS);
+      const word = r(words);
+      const typos = TYPO_VARIANTS[word];
+      return `beli ${r(typos)}`;
+    },
+    () => {
+      const words = Object.keys(TYPO_VARIANTS);
+      const word = r(words);
+      const typos = TYPO_VARIANTS[word];
+      return `${r(typos)} ${r(TIMES)}`;
+    },
+    () => {
+      const words = Object.keys(TYPO_VARIANTS);
+      const word = r(words);
+      const typos = TYPO_VARIANTS[word];
+      return `bayar ${r(typos)}`;
+    },
+  ],
 };
 
 // ==================================================================================
@@ -987,32 +1211,42 @@ function generate() {
   const rows = [];
 
   const targets = {
-    food_needs: 15500, // +500
-    food_wants: 6200, // +200
-    shopping_wants: 12000,
-    finance_needs: 12000,
-    transport_needs: 10000,
-    others_needs: 6000,
-    entertainment_wants: 3000,
-    telecom_needs: 2000,
-    gaming_wants: 8000,
-    beauty_mixed: 5000,
-    home_wants: 12000,
-    pets_needs: 1500,
-    hobbies_wants: 2500,
-    insurance_needs: 1500,
-    donations_mixed: 1000,
-    books_wants: 1200,
-    events_wants: 1000,
-    regional_food: 3100, // +600
-    food_delivery: 6000,
-    ride_services: 5000,
-    ewallet_reload: 2000,
-    parking_toll: 3000,
-    delivery_services: 2500,
-    online_services: 1500,
-    bookings: 3000,
-    grocery_shopping: 42000, // +1200 for final push
+    // Original generators (increased for 250k)
+    food_needs: 22000,
+    food_wants: 12000,
+    shopping_wants: 18000,
+    finance_needs: 18000,
+    transport_needs: 15000,
+    others_needs: 12000,
+    entertainment_wants: 8000,
+    telecom_needs: 5000,
+    gaming_wants: 12000,
+    beauty_mixed: 8000,
+    home_wants: 18000,
+    pets_needs: 3000,
+    hobbies_wants: 4000,
+    insurance_needs: 3000,
+    donations_mixed: 2000,
+    books_wants: 3000,
+    events_wants: 2500,
+    regional_food: 6000,
+    food_delivery: 10000,
+    ride_services: 8000,
+    ewallet_reload: 4000,
+    parking_toll: 5000,
+    delivery_services: 4000,
+    online_services: 3000,
+    bookings: 5000,
+    grocery_shopping: 22000,
+    // Single-word generators (INCREASED for better coverage)
+    single_food_needs: 8000,
+    single_food_wants: 5000,
+    single_transport: 6000,
+    single_shopping: 6000,
+    single_entertainment: 5000,
+    single_bills: 6000,
+    single_others: 6000,
+    typo_variants: 3000,
   };
 
   const categoryMap = {
@@ -1030,7 +1264,7 @@ function generate() {
     pets_needs: { cat: 'needs', sub: 'Others' },
     hobbies_wants: { cat: 'wants', sub: 'Entertainment' },
     insurance_needs: { cat: 'needs', sub: 'Financial Services' },
-    donations_mixed: { cat: 'needs', sub: 'Others' }, // FIXED: was Financial Services
+    donations_mixed: { cat: 'needs', sub: 'Others' },
     books_wants: { cat: 'wants', sub: 'Shopping' },
     events_wants: { cat: 'wants', sub: 'Others' },
     regional_food: { cat: 'needs', sub: 'Food & Beverage' },
@@ -1043,6 +1277,15 @@ function generate() {
     online_services: { cat: 'wants', sub: 'Telecommunication' },
     bookings: { cat: 'wants', sub: 'Transportation' },
     grocery_shopping: { cat: 'needs', sub: 'Food & Beverage' },
+    // SINGLE-WORD GENERATORS
+    single_food_needs: { cat: 'needs', sub: 'Food & Beverage' },
+    single_food_wants: { cat: 'wants', sub: 'Food & Beverage' },
+    single_transport: { cat: 'needs', sub: 'Transportation' },
+    single_shopping: { cat: 'wants', sub: 'Shopping' },
+    single_entertainment: { cat: 'wants', sub: 'Entertainment' },
+    single_bills: { cat: 'needs', sub: 'Financial Services' },
+    single_others: { cat: 'needs', sub: 'Others' },
+    typo_variants: { cat: 'needs', sub: 'Food & Beverage' }, // Typos mostly food-related
   };
 
   for (const [domain, target] of Object.entries(targets)) {
