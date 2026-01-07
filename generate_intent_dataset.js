@@ -123,8 +123,58 @@ const GROK_QUERIES = {
         "total saved",
         "savings this month",
         "savings analysis"
+    ],
+
+    // D. LOCATION QUERIES (Restaurant/Hotel/Place recommendations → Must use web search)
+    LOCATION_QUERIES: [
+        "makanan sedap", "makan best", "makan sedap", "restaurant best",
+        "kedai makan best", "cafe sedap", "warung best", "kedai kopi sedap",
+        "hotel murah", "hotel best", "hostel murah", "homestay best",
+        "penginapan murah", "resort best", "tempat best", "place to visit",
+        "makanan sedap kat", "makan best dekat", "hotel murah di",
+        "restoran sedap near", "cafe best around", "tempat makan",
+        "recommend food", "recommend restaurant", "recommend hotel",
+        "food recommendation", "restaurant recommendation", "where to eat",
+        "where to stay", "best place to eat", "best place to stay"
     ]
 };
+
+// LOCATION NAMES - These combined with food/hotel keywords → GROK
+const LOCATION_NAMES = [
+    "tapah", "ipoh", "kl", "kuala lumpur", "penang", "johor", "melaka",
+    "selangor", "perak", "kedah", "kelantan", "terengganu", "pahang",
+    "ttdi", "kepala batas", "pangkor", "putrajaya", "kampung baru",
+    "tambun", "cameron", "genting", "langkawi", "sabah", "sarawak",
+    "petaling jaya", "shah alam", "subang", "bangsar", "mont kiara",
+    "cheras", "ampang", "kajang", "klang", "setapak", "sentul",
+    "taiping", "teluk intan", "lumut", "sitiawan", "batu gajah",
+    "bukit merah", "sungai petani", "alor setar", "kangar", "kota bharu",
+    "kuantan", "temerloh", "bentong", "raub", "kuala terengganu",
+    "dungun", "marang", "besut", "setiu", "jerteh", "kuala besut",
+    "tapah road", "jalan baldwin", "pekan tapah", "bidor", "slim river"
+];
+
+// FOLLOW-UP PATTERNS - Short queries that need conversation history
+const FOLLOWUP_PATTERNS = [
+    "if hotel?", "kalau hotel?", "yang halal?", "yang murah?",
+    "nak yang halal", "nak yang murah", "yang dekat?", "dekat mana?",
+    "yang best?", "yang sedap?", "yang confirmed?", "yang cheap?",
+    "kalau dekat situ?", "kalau kat sana?", "yang recommend?",
+    "ada lagi?", "yang lain?", "option lain?", "lagi suggestion?",
+    "yang baru?", "yang popular?", "yang trending?", "yang viral?",
+    "macam mana nak order?", "macam mana nak book?", "how to order?",
+    "how to book?", "bukak dekat mana?", "bukak pukul berapa?",
+    "tutup pukul berapa?", "ada delivery?", "boleh takeaway?"
+];
+
+// MALAY SLANG / INFORMAL - Should NOT trigger GREETING or other wrong intents
+const MALAY_SLANG_GROK = [
+    "aku melayu", "aku islam", "aku cina", "aku india", "aku kristian",
+    "aku hindu", "aku buddha", "saya melayu", "saya islam",
+    "tolong aku", "help aku", "bro tolong", "tolong la bro",
+    "aku nak", "saya nak", "gua nak", "aku mau",
+    "aku perlukan", "saya perlukan", "gua perlukan"
+];
 
 // TEMPORAL KEYWORDS - Any query with these should route to GROK
 const TEMPORAL_KEYWORDS = [
@@ -492,13 +542,109 @@ function generateAmbiguousSingleWords() {
     return rows;
 }
 
+// 9. Generate LOCATION QUERY Data (Food/Hotel + Location → GROK)
+function generateLocationQueryData() {
+    const rows = [];
+    console.log(`\n🔹 Generating Location Query Data (makanan sedap kat tapah → GROK)...`);
+
+    const foodQueries = GROK_QUERIES.LOCATION_QUERIES;
+    const locationConnectors = ['kat', 'dekat', 'di', 'near', 'around', 'in', 'at'];
+
+    // Generate combinations of food/hotel queries + locations
+    for (const location of LOCATION_NAMES) {
+        for (const query of foodQueries) {
+            // Pattern: "{query} {connector} {location}"
+            for (const connector of locationConnectors) {
+                const text = `${query} ${connector} ${location}`;
+                rows.push(`"${introduceTypo(generateWithCase(text))}",${COMPLEX_LABEL}`);
+            }
+        }
+
+        // Also generate: "{location} ada apa best", "{location} food best"
+        rows.push(`"${location} ada apa best",${COMPLEX_LABEL}`);
+        rows.push(`"${location} ada apa sedap",${COMPLEX_LABEL}`);
+        rows.push(`"${location} food best",${COMPLEX_LABEL}`);
+        rows.push(`"tempat makan best ${location}",${COMPLEX_LABEL}`);
+        rows.push(`"nak makan kat ${location}",${COMPLEX_LABEL}`);
+        rows.push(`"recommend ${location}",${COMPLEX_LABEL}`);
+    }
+
+    // Add standalone location names (often misclassified)
+    for (const location of LOCATION_NAMES) {
+        for (let i = 0; i < 30; i++) {
+            rows.push(`"${generateWithCase(location)}",${COMPLEX_LABEL}`);
+            rows.push(`"${location} road",${COMPLEX_LABEL}`);
+            rows.push(`"dekat ${location}",${COMPLEX_LABEL}`);
+        }
+    }
+
+    console.log(`   ➜ Generated ${rows.length} location query samples`);
+    return rows;
+}
+
+// 10. Generate FOLLOW-UP Pattern Data (Short context-dependent queries → GROK)
+function generateFollowUpData() {
+    const rows = [];
+    console.log(`\n🔹 Generating Follow-Up Pattern Data (if hotel? → GROK)...`);
+
+    for (const pattern of FOLLOWUP_PATTERNS) {
+        // Generate many variants
+        for (let i = 0; i < 100; i++) {
+            rows.push(`"${introduceTypo(generateWithCase(pattern))}",${COMPLEX_LABEL}`);
+        }
+    }
+
+    // Also generate short question patterns
+    const shortQuestions = [
+        "yang mana?", "which one?", "where?", "how?", "when?",
+        "kat mana?", "bila?", "berapa?", "camne?", "mcm mana?"
+    ];
+
+    for (const q of shortQuestions) {
+        for (let i = 0; i < 50; i++) {
+            rows.push(`"${generateWithCase(q)}",${COMPLEX_LABEL}`);
+        }
+    }
+
+    console.log(`   ➜ Generated ${rows.length} follow-up pattern samples`);
+    return rows;
+}
+
+// 11. Generate MALAY SLANG Data (Avoid misclassification as GREETING)
+function generateMalaySlangData() {
+    const rows = [];
+    console.log(`\n🔹 Generating Malay Slang Data (aku melayu → GROK, NOT GREETING)...`);
+
+    for (const slang of MALAY_SLANG_GROK) {
+        for (let i = 0; i < 80; i++) {
+            rows.push(`"${introduceTypo(generateWithCase(slang))}",${COMPLEX_LABEL}`);
+        }
+    }
+
+    // Add vulgar word patterns that should NOT trigger friendly intents
+    const vulgarPatterns = [
+        "bro help la", "tolong bro", "aku perlukan bantuan",
+        "saya nak tanya", "gua nak tanya", "aku ada soalan",
+        "boleh tolong ke", "tolong saya please"
+    ];
+
+    for (const pattern of vulgarPatterns) {
+        for (let i = 0; i < 50; i++) {
+            rows.push(`"${introduceTypo(generateWithCase(pattern))}",${COMPLEX_LABEL}`);
+        }
+    }
+
+    console.log(`   ➜ Generated ${rows.length} Malay slang samples`);
+    return rows;
+}
+
 // ============================================================================
 // 6. MAIN EXECUTION
 // ============================================================================
 
 function main() {
     console.log("=========================================================");
-    console.log("   🐻 BERUANG SUPER-GENERATOR V8 - TYPO-PROOF EDITION 🐻");
+    console.log("   🐻 BERUANG SUPER-GENERATOR V9 - ANTI-HALLUCINATION 🐻");
     console.log("=========================================================");
     console.log("");
     console.log("Key Improvements:");
@@ -508,8 +654,11 @@ function main() {
     console.log("  ✅ Uncertain inputs → GROK (idk, not sure)");
     console.log("  ✅ NAV_* uses action verbs only");
     console.log("  ✅ GARBAGE has no conflicting patterns");
-    console.log("  ✅ NEW: Explicit typo mappings (helli→GREETING)");
-    console.log("  ✅ NEW: Ambiguous single words → GROK");
+    console.log("  ✅ Explicit typo mappings (helli→GREETING)");
+    console.log("  ✅ Ambiguous single words → GROK");
+    console.log("  ✅ NEW: Location queries → GROK (makanan sedap kat tapah)");
+    console.log("  ✅ NEW: Follow-up patterns → GROK (if hotel?, yang halal?)");
+    console.log("  ✅ NEW: Malay slang → GROK (aku melayu, bro tolong)");
     console.log("");
 
     const grokQueryRows = generateGrokQueryData();
@@ -520,6 +669,9 @@ function main() {
     const garbageRows = generateGarbage();
     const explicitTypoRows = generateExplicitTypos();
     const ambiguousRows = generateAmbiguousSingleWords();
+    const locationRows = generateLocationQueryData();
+    const followUpRows = generateFollowUpData();
+    const slangRows = generateMalaySlangData();
 
     const allRows = [
         ...grokQueryRows,
@@ -529,7 +681,10 @@ function main() {
         ...localRows,
         ...garbageRows,
         ...explicitTypoRows,
-        ...ambiguousRows
+        ...ambiguousRows,
+        ...locationRows,
+        ...followUpRows,
+        ...slangRows
     ];
 
     // Shuffle
@@ -559,6 +714,9 @@ function main() {
     console.log(`  • Garbage: ${garbageRows.length.toLocaleString()}`);
     console.log(`  • Explicit Typos: ${explicitTypoRows.length.toLocaleString()}`);
     console.log(`  • Ambiguous Words: ${ambiguousRows.length.toLocaleString()}`);
+    console.log(`  • Location Queries: ${locationRows.length.toLocaleString()}`);
+    console.log(`  • Follow-up Patterns: ${followUpRows.length.toLocaleString()}`);
+    console.log(`  • Malay Slang: ${slangRows.length.toLocaleString()}`);
     console.log(`=========================================================`);
 }
 
