@@ -2,10 +2,10 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-12.0-blue.svg)
-![Transaction Accuracy](https://img.shields.io/badge/trans__accuracy-99.6%25-brightgreen.svg)
-![Intent Accuracy](https://img.shields.io/badge/intent__accuracy-99.57%25-brightgreen.svg)
-![Dataset](https://img.shields.io/badge/dataset-307k_combined_rows-orange.svg)
+![Version](https://img.shields.io/badge/version-1.0-blue.svg)
+![Transaction Accuracy](https://img.shields.io/badge/trans__accuracy-99.61%25-brightgreen.svg)
+![Intent Accuracy](https://img.shields.io/badge/intent__accuracy-99.62%25-brightgreen.svg)
+![Dataset](https://img.shields.io/badge/dataset-334k_combined_rows-orange.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 
 **🧠 The Intelligence Engine for the Beruang Finance Ecosystem**
@@ -45,12 +45,12 @@ graph TD
 
 ## ✨ Features
 
-### 💎 The 220k "Gold Standard" Dataset
+### 💎 The 334k "Gold Standard" Dataset
 - **Logic-Proof Generation**: Ultra-strict template-based pairing (e.g., "Starbucks" is always Wants, "Toll" is always Needs).
 - **Zero Nonsense**: Eliminates random word mixing (no more "minum garam" or "shopping roadtax").
 - **Malaysian Identity**: 600+ local vocabulary items including Zakat, Touch n Go, Grab, and regional dialects.
 - **Zero Overfitting**: Verified through validation/training loss parity; the model generalizes exceptionally well to unseen local merchant names.
-- **Set-Based Uniqueness**: Each of the 220,152 transaction rows and 86,970 intent rows is unique and semantically valid.
+- **Set-Based Uniqueness**: Each of the 220,152 transaction rows and 114,270 intent rows is unique and semantically valid.
 - **Explicit Typo Mapping**: Intent dataset includes intentional typo variations for high-frequency commands to ensure zero-misclassification for common mistakes.
 
 ### 🧠 Dual-Output Architecture
@@ -62,7 +62,7 @@ graph TD
 
 ## 🏗️ 1. Intent Classification (NLP)
 
-The "Voice" of Beruang. This model uses **all-MiniLM-L6-v2** embeddings to map user queries to **56 distinct intents** with 99.57% accuracy. It features a custom **Typo-Proof Engineering** layer that explicitly maps common variations (e.g., *helli* to *GREETING*).
+The "Voice" of Beruang. This model uses **all-MiniLM-L6-v2** embeddings to map user queries to **56 distinct intents** with 99.62% accuracy. It features a custom **Typo-Proof Engineering** layer that explicitly maps common variations (e.g., *helli* to *GREETING*).
 
 ---
 
@@ -107,7 +107,7 @@ Evidence of the model's reliability in identifying complex user intents.
 <td width="50%">
 <p align="center"><b>Training Curves</b><br/>
 <img src="visualizations/intent/post_training/training_combined_curves.png" width="100%"><br/>
-<i>Shows smooth convergence with zero overfitting, reaching 99%+ accuracy by Epoch 20.</i></p>
+<i>Shows smooth convergence with zero overfitting, reaching 99.6% accuracy by Epoch 25.</i></p>
 </td>
 <td width="50%">
 <p align="center"><b>Confusion Matrix Heatmap</b><br/>
@@ -121,7 +121,7 @@ Evidence of the model's reliability in identifying complex user intents.
 
 ## 🏗️ 2. Transaction Classification (BiLSTM)
 
-The "Brain" of Beruang. This model processes custom transaction descriptions using a **Bi-directional LSTM** architecture, achieving a logic-proof **99.6% accuracy**.
+The "Brain" of Beruang. This model processes custom transaction descriptions using a **Bi-directional LSTM** architecture, achieving a logic-proof **99.61% accuracy**.
 
 ### 📊 Transaction Visualization Gallery
 
@@ -166,7 +166,7 @@ Evidence of the model's reliability and **zero-overfitting** architecture.
 <td width="50%">
 <p align="center"><b>Model Accuracy</b><br/>
 <img src="visualizations/transaction/post_training/curve_training_accuracy.png" width="100%"><br/>
-<i>The climb to 99.6% accuracy, demonstrating superior generalization on test data.</i></p>
+<i>The climb to 99.61% accuracy, demonstrating superior generalization on test data.</i></p>
 </td>
 <td width="50%">
 <p align="center"><b>Subcategory Heatmap</b><br/>
